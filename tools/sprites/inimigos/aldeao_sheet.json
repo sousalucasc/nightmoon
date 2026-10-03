@@ -1,0 +1,283 @@
+{
+ "frames": [
+  {
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 170
+  },
+  {
+   "frame": {
+    "x": 32,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 170
+  },
+  {
+   "frame": {
+    "x": 64,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 170
+  },
+  {
+   "frame": {
+    "x": 96,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 170
+  },
+  {
+   "frame": {
+    "x": 128,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 160,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 192,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 224,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 0,
+    "y": 32,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 32,
+    "y": 32,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 64,
+    "y": 32,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 180
+  },
+  {
+   "frame": {
+    "x": 96,
+    "y": 32,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 180
+  },
+  {
+   "frame": {
+    "x": 128,
+    "y": 32,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 180
+  },
+  {
+   "frame": {
+    "x": 160,
+    "y": 32,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 120
+  },
+  {
+   "frame": {
+    "x": 192,
+    "y": 32,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 120
+  },
+  {
+   "frame": {
+    "x": 224,
+    "y": 32,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 160
+  },
+  {
+   "frame": {
+    "x": 0,
+    "y": 64,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 160
+  },
+  {
+   "frame": {
+    "x": 32,
+    "y": 64,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 300
+  },
+  {
+   "frame": {
+    "x": 64,
+    "y": 64,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 300
+  },
+  {
+   "frame": {
+    "x": 96,
+    "y": 64,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 128,
+    "y": 64,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 160,
+    "y": 64,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 192,
+    "y": 64,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 224,
+    "y": 64,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 0,
+    "y": 96,
+    "w": 32,
+    "h": 32
+   },
+   "duration": 110
+  }
+ ],
+ "meta": {
+  "size": {
+   "w": 256,
+   "h": 128
+  },
+  "frameTags": [
+   {
+    "name": "idle",
+    "from": 0,
+    "to": 3,
+    "direction": "forward"
+   },
+   {
+    "name": "walk",
+    "from": 4,
+    "to": 9,
+    "direction": "forward"
+   },
+   {
+    "name": "ataque",
+    "from": 10,
+    "to": 12,
+    "direction": "forward"
+   },
+   {
+    "name": "hit",
+    "from": 13,
+    "to": 14,
+    "direction": "forward"
+   },
+   {
+    "name": "stagger",
+    "from": 15,
+    "to": 16,
+    "direction": "forward"
+   },
+   {
+    "name": "caido",
+    "from": 17,
+    "to": 18,
+    "direction": "forward"
+   },
+   {
+    "name": "morte",
+    "from": 19,
+    "to": 24,
+    "direction": "forward"
+   }
+  ],
+  "pivot": {
+   "x": 16,
+   "y": 30
+  }
+ }
+}

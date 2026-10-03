@@ -1,0 +1,12 @@
+Nightmoon - efeitos sonoros (síntese procedural, sem samples)
+WAV 44100 Hz, mono, PCM 16 bits, pico em -1 dBFS.
+
+snd_golpe.wav — golpe de espada/machado cortando o ar (0,21 s)
+snd_acerto.wav — lâmina acertando carne: baque seco com respingo úmido (0,18 s)
+snd_tiro.wav — tiro de pistola de pederneira: estalo seco com corpo grave (0,25 s)
+snd_escopeta.wav — bacamarte serrado: estrondo grave com cauda ribombante (0,60 s)
+snd_parry.wav — parry bem-sucedido: tinido metálico brilhante (0,50 s)
+snd_dano.wav — jogador ferido: impacto surdo e pesado com ronco grave (0,30 s)
+snd_morte.wav — inimigo morre e desaba no chão: baque grave com detritos (0,50 s)
+snd_lanterna.wav — descanso na lanterna: sino suave e quente sobre um sopro de chama (1,40 s)
+snd_nevoa.wav — portão de névoa se fechando: zumbido grave e sinistro com névoa crescente (1,78 s)

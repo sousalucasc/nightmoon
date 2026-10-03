@@ -1,0 +1,292 @@
+{
+ "frames": [
+  {
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 180
+  },
+  {
+   "frame": {
+    "x": 48,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 180
+  },
+  {
+   "frame": {
+    "x": 96,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 180
+  },
+  {
+   "frame": {
+    "x": 144,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 180
+  },
+  {
+   "frame": {
+    "x": 192,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 130
+  },
+  {
+   "frame": {
+    "x": 240,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 130
+  },
+  {
+   "frame": {
+    "x": 288,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 130
+  },
+  {
+   "frame": {
+    "x": 336,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 130
+  },
+  {
+   "frame": {
+    "x": 0,
+    "y": 48,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 130
+  },
+  {
+   "frame": {
+    "x": 48,
+    "y": 48,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 130
+  },
+  {
+   "frame": {
+    "x": 96,
+    "y": 48,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 200
+  },
+  {
+   "frame": {
+    "x": 144,
+    "y": 48,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 200
+  },
+  {
+   "frame": {
+    "x": 192,
+    "y": 48,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 200
+  },
+  {
+   "frame": {
+    "x": 240,
+    "y": 48,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 200
+  },
+  {
+   "frame": {
+    "x": 288,
+    "y": 48,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 200
+  },
+  {
+   "frame": {
+    "x": 336,
+    "y": 48,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 200
+  },
+  {
+   "frame": {
+    "x": 0,
+    "y": 96,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 150
+  },
+  {
+   "frame": {
+    "x": 48,
+    "y": 96,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 150
+  },
+  {
+   "frame": {
+    "x": 96,
+    "y": 96,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 300
+  },
+  {
+   "frame": {
+    "x": 144,
+    "y": 96,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 300
+  },
+  {
+   "frame": {
+    "x": 192,
+    "y": 96,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 240,
+    "y": 96,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 288,
+    "y": 96,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 336,
+    "y": 96,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 0,
+    "y": 144,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 110
+  },
+  {
+   "frame": {
+    "x": 48,
+    "y": 144,
+    "w": 48,
+    "h": 48
+   },
+   "duration": 110
+  }
+ ],
+ "meta": {
+  "size": {
+   "w": 384,
+   "h": 192
+  },
+  "frameTags": [
+   {
+    "name": "idle",
+    "from": 0,
+    "to": 3,
+    "direction": "forward"
+   },
+   {
+    "name": "walk",
+    "from": 4,
+    "to": 9,
+    "direction": "forward"
+   },
+   {
+    "name": "pancada",
+    "from": 10,
+    "to": 12,
+    "direction": "forward"
+   },
+   {
+    "name": "agarrao",
+    "from": 13,
+    "to": 15,
+    "direction": "forward"
+   },
+   {
+    "name": "stagger",
+    "from": 16,
+    "to": 17,
+    "direction": "forward"
+   },
+   {
+    "name": "caido",
+    "from": 18,
+    "to": 19,
+    "direction": "forward"
+   },
+   {
+    "name": "morte",
+    "from": 20,
+    "to": 25,
+    "direction": "forward"
+   }
+  ],
+  "pivot": {
+   "x": 24,
+   "y": 45
+  }
+ }
+}
