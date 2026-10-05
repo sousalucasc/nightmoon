@@ -1,0 +1,1 @@
+vel = 1.5; //px por frame
