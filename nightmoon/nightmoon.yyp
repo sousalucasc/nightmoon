@@ -48,6 +48,7 @@
     {"id":{"name":"rm_init","path":"rooms/rm_init/rm_init.yy",},},
     {"id":{"name":"rm_teste","path":"rooms/rm_teste/rm_teste.yy",},},
     {"id":{"name":"scr_config","path":"scripts/scr_config/scr_config.yy",},},
+    {"id":{"name":"scr_player","path":"scripts/scr_player/scr_player.yy",},},
     {"id":{"name":"spr_mask_player","path":"sprites/spr_mask_player/spr_mask_player.yy",},},
     {"id":{"name":"spr_parede","path":"sprites/spr_parede/spr_parede.yy",},},
     {"id":{"name":"spr_pilar","path":"sprites/spr_pilar/spr_pilar.yy",},},

@@ -11,7 +11,6 @@ camera = camera_create_view(0,0,LARGURA_BASE,ALTURA_BASE);
 cam_x = 0;
 cam_y = 0;
 
-
 //INPUT
 //variaveis começam todas zeradas já que são preenchidas no Begin Step
 mover_x = 0;
@@ -25,7 +24,9 @@ aperta_cura = false;
 aperta_interagir = false;
 
 //DEBUG
-
 debug = false;
-
 room_goto(rm_teste); // manda o jogo para room de teste
+
+//PLAYER STATE
+nomes_pl = ["LIVRE","ESQUIVA","ATAQUE","TIRO","CURA","HITSTUN","VISCERAL","MORTE"];
+
