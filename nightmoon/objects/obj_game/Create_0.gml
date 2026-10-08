@@ -25,6 +25,12 @@ aperta_interagir = false;
 
 //DEBUG
 debug = false;
+
+buf_esquiva = 0;
+buf_leve = 0;
+buf_pesado = 0;
+buf_tiro = 0;
+
 room_goto(rm_teste); // manda o jogo para room de teste
 
 //PLAYER STATE

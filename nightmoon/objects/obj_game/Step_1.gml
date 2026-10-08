@@ -25,3 +25,10 @@ if(keyboard_check_pressed(vk_f3)){
 	debug = !debug;
 }
 
+// buffer de botao
+buf_esquiva = aperta_esquiva ? BUFFER_FRAMES : max(0, buf_esquiva - 1);
+buf_leve    = aperta_leve    ? BUFFER_FRAMES : max(0, buf_leve - 1);
+buf_pesado  = aperta_pesado  ? BUFFER_FRAMES : max(0, buf_pesado - 1);
+buf_tiro    = aperta_tiro    ? BUFFER_FRAMES : max(0, buf_tiro - 1);
+
+	

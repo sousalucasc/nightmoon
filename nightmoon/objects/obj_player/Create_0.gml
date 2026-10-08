@@ -13,6 +13,16 @@ esq = backstep; // default para botao de dash/esquiva e o backstap, se nao houve
 esq_dir = 0; // direcao
 esq_vel = 0; // velocidade
 esq_desacel = 0; // quanto decai por frame
-invuneravel = false; // se esta invuneravel ou nao
+invulneravel = false; // se esta invuneravel ou nao
+
+hp_max = 100;
+hp = hp_max;
+st_max = 100;
+st = st_max;
+st_espera = 0; // frames ate stamina voltar a encher
+invul_timer = 0; // invulnerabilidade apos tomar dano
+kb_dir = 0; // knockback direcao
+kb_vel = 0; // knockback velocidade	(velocidade atual)
+kb_desacel = 0; // quanto cai por frame
 
 
