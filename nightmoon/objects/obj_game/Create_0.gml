@@ -31,6 +31,10 @@ buf_leve = 0;
 buf_pesado = 0;
 buf_tiro = 0;
 
+//ARMAS
+dados_armas();
+arma = global.armas.cutelo;
+
 room_goto(rm_teste); // manda o jogo para room de teste
 
 //PLAYER STATE

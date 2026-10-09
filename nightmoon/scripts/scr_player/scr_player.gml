@@ -19,8 +19,9 @@ function player_mover(_mult){
 
 // Estado livre
 function player_estado_livre(){
-	player_mover(1);
-	player_tentar_esquivar();
+ player_mover(1);
+    if (player_tentar_esquivar()) return;
+    if (player_tentar_atacar()) return;
 }
 
 // Esquiva, backstep ou dash dependendo do movimento do player
@@ -85,3 +86,63 @@ function player_estado_morte(){
 		room_restart();	
 	}
 }	
+
+/// começa um golpe leve ou pesado se o botão está no buffer e tem stamina.
+function player_tentar_atacar() {
+    var _arma = obj_game.arma;
+    if (obj_game.buf_leve > 0 && st > 0) {
+        obj_game.buf_leve = 0;
+        // Vindo de um golpe leve, segue o combo. Senão, começa do primeiro.
+        if (estado == PL.ATAQUE && !golpe_pesado) {
+            combo_i = (combo_i + 1) mod array_length(_arma.leves);
+        } else {
+            combo_i = 0;
+        }
+        player_comecar_golpe(_arma.leves[combo_i], false);
+        return true;
+    }
+    if (obj_game.buf_pesado > 0 && st > 0) {
+        obj_game.buf_pesado = 0;
+        player_comecar_golpe(_arma.pesado, true);
+        return true;
+    }
+    return false;
+}
+
+function player_comecar_golpe(_golpe, _pesado) {
+    golpe = _golpe;
+    golpe_pesado = _pesado;
+    acertados = [];                 // golpe novo: ninguém acertado ainda
+    ataque_dir = obj_game.mira_dir;
+    player_gastar_stamina(golpe.stamina);
+    player_trocar(PL.ATAQUE);
+}
+
+function player_estado_ataque() {
+    var _fim_windup = golpe.windup;
+    var _fim_ativo  = golpe.windup + golpe.ativo;
+    var _fim_total  = _fim_ativo + golpe.recovery;
+
+    if (estado_timer <= _fim_windup) {
+        // Windup: ainda gira para a mira.
+        ataque_dir = obj_game.mira_dir;
+    } else if (estado_timer <= _fim_ativo) {
+        // Ativo: avança um pouco e acerta quem estiver no setor.
+        var _passo = golpe.avanco / golpe.ativo;
+        move_and_collide(lengthdir_x(_passo, ataque_dir), lengthdir_y(_passo, ataque_dir), obj_parede);
+
+        var _novos = golpe_setor(x, y, ataque_dir, golpe.alcance, golpe.arco, obj_boneco, acertados);
+        for (var i = 0; i < array_length(_novos); i++) {
+            array_push(acertados, _novos[i]);
+            inimigo_dano(_novos[i], golpe.dano);
+        }
+    } else {
+        // Recovery: um leve apertado aqui continua o combo.
+        if (!golpe_pesado && player_tentar_atacar()) return;
+    }
+
+    if (estado_timer >= _fim_total) {
+        player_trocar(PL.LIVRE);
+    }
+}
+

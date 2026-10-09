@@ -24,5 +24,11 @@ invul_timer = 0; // invulnerabilidade apos tomar dano
 kb_dir = 0; // knockback direcao
 kb_vel = 0; // knockback velocidade	(velocidade atual)
 kb_desacel = 0; // quanto cai por frame
-
+// ataque
+golpe = undefined;      // struct do golpe atual (scr_dados)
+golpe_pesado = false;
+combo_i = 0;            // posição no combo (0 = primeiro golpe)
+ataque_dir = 0;         // direção do golpe (trava no ativo)
+acertados = [];         // quem este golpe já acertou
+raio = 6;               // tamanho do corpo, para os golpes inimigos
 

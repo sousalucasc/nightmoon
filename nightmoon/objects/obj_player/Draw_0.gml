@@ -19,4 +19,15 @@ if (obj_game.debug) {
     draw_healthbar(x - 10, y - 28, x + 10, y - 27, hp / hp_max * 100, c_black, c_red, c_red, 0, true, false);
     draw_healthbar(x - 10, y - 25, x + 10, y - 24, st / st_max * 100, c_black, c_yellow, c_yellow, 0, true, false);
     draw_set_colour(c_white);
+	 // debug do golpe
+	 // debug do golpe
+    if (estado == PL.ATAQUE) {
+        if (estado_timer > golpe.windup && estado_timer <= golpe.windup + golpe.ativo) {
+            draw_set_colour(c_red);
+        } else {
+            draw_set_colour(c_gray);
+        }
+        desenhar_setor(x, y, ataque_dir, golpe.alcance, golpe.arco);
+        draw_set_colour(c_lime);
+    }
 }

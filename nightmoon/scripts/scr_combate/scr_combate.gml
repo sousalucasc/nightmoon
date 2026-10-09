@@ -20,3 +20,30 @@ function player_dano(_dano,_de_x,_de_y){
 	}
 	return _entrou;
 }
+
+/// procura alvos do tipo _obj dentro de um setor
+/// devolve array com os que estão dentro e ainda não estão em _acertados
+function golpe_setor(_x, _y, _dir, _alcance, _arco, _obj, _acertados) {
+    var _novos = [];
+    with (_obj) {
+        if (!array_contains(_acertados, id)) {
+            var _dist = point_distance(_x, _y, x, y);
+            var _ang = point_direction(_x, _y, x, y);
+            // angle_difference dá a diferença entre dois ângulos, de -180 a 180.
+            var _no_arco = (_arco >= 360) || (abs(angle_difference(_dir, _ang)) <= _arco / 2);
+            if (_dist <= _alcance + raio && _no_arco) {
+                array_push(_novos, id);
+            }
+        }
+    }
+    return _novos;
+}
+
+/// aplica dano num inimigo 
+function inimigo_dano(_inst, _dano) {
+    with (_inst) {
+        hp -= _dano;
+        flash = 6;
+        ultimo_dano = _dano;
+    }
+}

@@ -1,4 +1,4 @@
-estado_timer += 1;
+	estado_timer += 1;
 
 
 // estado livre e esquiva do player
@@ -7,6 +7,7 @@ switch(estado){
 	case PL.ESQUIVA: player_estado_esquiva(); break;
 	case PL.HITSTUN: player_estado_hitstun(); break;
 	case PL.MORTE: player_estado_morte(); break;
+	case PL.ATAQUE:  player_estado_ataque();  break;
 }
 
 // stamina volta a encher depois de 30 frames sem gastar
