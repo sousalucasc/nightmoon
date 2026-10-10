@@ -31,4 +31,15 @@ buf_leve    = aperta_leve    ? BUFFER_FRAMES : max(0, buf_leve - 1);
 buf_pesado  = aperta_pesado  ? BUFFER_FRAMES : max(0, buf_pesado - 1);
 buf_tiro    = aperta_tiro    ? BUFFER_FRAMES : max(0, buf_tiro - 1);
 
-	
+// teclas de teste (só com o F3 ligado)
+if (debug) {
+    if (keyboard_check_pressed(ord("1"))) arma = global.armas.bengala;
+    if (keyboard_check_pressed(ord("2"))) arma = global.armas.machado;
+    if (keyboard_check_pressed(ord("3"))) arma = global.armas.cutelo;
+    if (keyboard_check_pressed(ord("7"))) atr_forca += 1;
+    if (keyboard_check_pressed(ord("8"))) atr_destreza += 1;
+    if (keyboard_check_pressed(ord("0"))) {
+        atr_forca = 0;
+        atr_destreza = 0;
+    }
+}

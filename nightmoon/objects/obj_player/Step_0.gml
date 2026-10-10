@@ -10,7 +10,7 @@ switch(estado){
 	case PL.ATAQUE:  player_estado_ataque();  break;
 }
 
-// stamina volta a encher depois de 30 frames sem gastar
+// stamina volta a encher depois de player_gastar_stamina
 if(st_espera > 0){
 	st_espera -= 1;
 }else{

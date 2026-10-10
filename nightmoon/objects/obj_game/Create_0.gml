@@ -40,3 +40,7 @@ room_goto(rm_teste); // manda o jogo para room de teste
 //PLAYER STATE
 nomes_pl = ["LIVRE","ESQUIVA","ATAQUE","TIRO","CURA","HITSTUN","VISCERAL","MORTE"];
 
+//ATRIBUTOS
+atr_forca = 0;
+atr_destreza = 0;
+
