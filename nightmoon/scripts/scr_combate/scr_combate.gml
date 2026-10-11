@@ -7,6 +7,8 @@ function player_dano(_dano, _de_x, _de_y) {
     with (obj_player) {
         if (!invulneravel && invul_timer <= 0 && estado != PL.MORTE) {
             _entrou = true;
+			aplicar_hitstop(4);
+            tremer_tela(2);
             hp -= _dano;
             // Hyper armor: golpe com a flag não é interrompido no windup nem no ativo.
             var _hyper = (estado == PL.ATAQUE && golpe.hyper && estado_timer <= golpe.windup + golpe.ativo);
@@ -57,5 +59,14 @@ function inimigo_dano(_inst, _dano) {
 function dano_escalado(_base, _esc_for, _esc_des) {
     var _bonus = _esc_for * 0.08 * obj_game.atr_forca + _esc_des * 0.08 * obj_game.atr_destreza;
     return round(_base * (1 + _bonus));
+}
+
+//varre o arco no ativo
+function angulo_golpe(_timer, _windup, _ativo, _dir, _arco, _sentido) {
+    var _ini = _dir + _arco / 2 * _sentido;
+    var _fim = _dir - _arco / 2 * _sentido;
+    if (_timer <= _windup) return _ini;
+    if (_timer <= _windup + _ativo) return lerp(_ini, _fim, (_timer - _windup) / _ativo);
+    return _fim;
 }
 

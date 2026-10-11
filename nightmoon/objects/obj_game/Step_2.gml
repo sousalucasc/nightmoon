@@ -13,3 +13,18 @@ cam_x = clamp(cam_x,0,room_width - LARGURA_BASE);
 cam_y = clamp(cam_y,0,room_height - ALTURA_BASE);
 
 camera_set_view_pos(camera,round(cam_x),round(cam_y));
+
+// tremor desloca a camera
+var _tx = 0;
+var _ty = 0;
+if (tremor > 0) {
+    _tx = random_range(-tremor, tremor);
+    _ty = random_range(-tremor, tremor);
+    tremor = tremor * 0.85;
+    if (tremor < 0.3) {
+        tremor = 0;
+    }
+}
+
+// pixel art fix
+camera_set_view_pos(camera, round(cam_x + _tx), round(cam_y + _ty));

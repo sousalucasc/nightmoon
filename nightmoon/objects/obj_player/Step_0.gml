@@ -1,4 +1,5 @@
-	estado_timer += 1;
+if (jogo_congelado()) exit;
+estado_timer += 1;
 
 
 // estado livre e esquiva do player
@@ -23,10 +24,16 @@ if(invul_timer > 0){
 }
 
 // corpo vira pro lado do mouse
-if(obj_game.mira_dir>90 && obj_game.mira_dir<270){
-	lado = -1;	
-}else{
-	lado = 1;
+var _olhar = obj_game.mira_dir;
+if (estado == PL.ATAQUE) {
+    _olhar = ataque_dir;
 }
+if (_olhar > 90 && _olhar < 270) {
+    lado = -1;
+} else {
+    lado = 1;
+}
+
+player_animar();
 
 depth = -y;

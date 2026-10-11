@@ -1,0 +1,1 @@
+draw_sprite_ext(sprite_index, quadro, x, y, 1, escala_y, image_angle, c_white, 1);

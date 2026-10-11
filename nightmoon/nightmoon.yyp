@@ -43,6 +43,7 @@
   "resources":[
     {"id":{"name":"obj_armadilha","path":"objects/obj_armadilha/obj_armadilha.yy",},},
     {"id":{"name":"obj_boneco","path":"objects/obj_boneco/obj_boneco.yy",},},
+    {"id":{"name":"obj_fx","path":"objects/obj_fx/obj_fx.yy",},},
     {"id":{"name":"obj_game","path":"objects/obj_game/obj_game.yy",},},
     {"id":{"name":"obj_parede","path":"objects/obj_parede/obj_parede.yy",},},
     {"id":{"name":"obj_pilar","path":"objects/obj_pilar/obj_pilar.yy",},},

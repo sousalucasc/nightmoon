@@ -182,11 +182,18 @@ function player_tentar_atacar() {
 function player_comecar_golpe(_golpe, _pesado) {
     golpe = _golpe;
     golpe_pesado = _pesado;
-    acertados = [];                 // golpe novo: ninguém acertado ainda
+    acertados = [];                 // golpe novo
     ataque_dir = obj_game.mira_dir;
+    // golpes do combo alternam o lado do corte
+    if (_pesado || combo_i mod 2 == 0) {
+        sentido = 1;
+    } else {
+        sentido = -1;
+    }
     player_gastar_stamina(golpe.stamina);
     player_trocar(PL.ATAQUE);
 }
+
 
 function player_estado_ataque() {
     var _arma = obj_game.arma;
@@ -195,10 +202,14 @@ function player_estado_ataque() {
     var _fim_total  = _fim_ativo + golpe.recovery;
 
     if (estado_timer <= _fim_windup) {
-        // Windup: ainda gira para a mira.
+        // windup gira para mira
         ataque_dir = obj_game.mira_dir;
     } else if (estado_timer <= _fim_ativo) {
-        // Ativo: avança um pouco e acerta quem estiver no setor.
+        // primeiro frame de corte
+        if (estado_timer == _fim_windup + 1) {
+            fx_criar(x, y - 10, golpe.fx, ataque_dir, sentido * lado);
+        }
+        // quando ativo avanca um pouco
         var _passo = golpe.avanco / golpe.ativo;
         move_and_collide(lengthdir_x(_passo, ataque_dir), lengthdir_y(_passo, ataque_dir), obj_parede);
 
@@ -208,10 +219,13 @@ function player_estado_ataque() {
             array_push(acertados, _novos[i]);
             inimigo_dano(_novos[i], _dano);
         }
+        if (array_length(_novos) > 0) {
+            aplicar_hitstop(3);
+            tremer_tela(1);
+        }
     } else {
-        // Recovery: um leve apertado aqui continua o combo.
+        // recovery.
         if (!golpe_pesado && player_tentar_atacar()) return;
-        // Na segunda metade do recovery, a esquiva corta o golpe.
         if (estado_timer > _fim_ativo + golpe.recovery / 2) {
             if (player_tentar_esquivar()) return;
         }
@@ -220,4 +234,55 @@ function player_estado_ataque() {
     if (estado_timer >= _fim_total) {
         player_trocar(PL.LIVRE);
     }
+}
+
+// escolhe sprite e quadro conforme o estado.
+function player_animar() {
+    anim_timer += 1;
+    switch (estado) {
+        case PL.LIVRE:
+            if (obj_game.mover_x != 0 || obj_game.mover_y != 0) {
+                sprite_index = spr.andando;
+                image_index = (anim_timer div 6) mod sprite_get_number(sprite_index);
+            } else {
+                sprite_index = spr.parado;
+                image_index = (anim_timer div 10) mod sprite_get_number(sprite_index);
+            }
+            break;
+        case PL.ESQUIVA:
+            sprite_index = (esq == dash) ? spr.dash : spr.backstep;
+            image_index = anim_quadro(estado_timer, esq.duracao, sprite_index);
+            break;
+        case PL.ATAQUE:
+            // 3 quadros: windup, ativo, recovery
+            sprite_index = spr.ataque;
+            if (estado_timer <= golpe.windup) {
+                image_index = 0;
+            } else if (estado_timer <= golpe.windup + golpe.ativo) {
+                image_index = 1;
+            } else {
+                image_index = 2;
+            }
+            break;
+        case PL.HITSTUN:
+            sprite_index = spr.hit;
+            image_index = anim_quadro(estado_timer, 18, sprite_index);
+            break;
+        case PL.MORTE:
+            sprite_index = spr.morte;
+            image_index = anim_quadro(estado_timer, 60, sprite_index);
+            break;
+    }
+}
+
+/// desenha a arma na mao girando conforme golpe
+function player_desenhar_arma() {
+    var _ang;
+    if (estado == PL.ATAQUE) {
+        _ang = angulo_golpe(estado_timer, golpe.windup, golpe.ativo, ataque_dir, golpe.arco, sentido * lado);
+    } else {
+        // parada aponta a mira
+        _ang = obj_game.mira_dir - 30 * lado;
+    }
+    draw_sprite_ext(obj_game.arma.sprite, 0, x + 2 * lado, y - 10, 1, 1, _ang, c_white, 1);
 }

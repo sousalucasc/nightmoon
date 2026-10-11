@@ -1,6 +1,11 @@
 // begin step roda antes do step de todo mundo
 // lê o input uma vez por frame
 
+// hitstop
+if (hitstop > 0) {
+    hitstop -= 1;
+}
+
 // keyboard check devolve 1 (apertado) ou 0 (solto)
 
 mover_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
@@ -15,8 +20,8 @@ if (instance_exists(obj_player)){
 // pressed, verdadeiro so no frame que a tecla descer
 
 aperta_esquiva = keyboard_check_pressed(vk_space);
-aperta_leve = mouse_check_button(mb_left);
-aperta_pesado = mouse_check_button(mb_right);
+aperta_leve = mouse_check_button_pressed(mb_left);
+aperta_pesado = mouse_check_button_pressed(mb_right);
 aperta_tiro = keyboard_check_pressed(ord("Q"));
 aperta_cura	= keyboard_check_pressed(ord("E"));
 aperta_interagir = keyboard_check_pressed(ord("F"));

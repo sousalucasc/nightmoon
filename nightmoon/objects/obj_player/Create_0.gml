@@ -24,6 +24,7 @@ invul_timer = 0; // invulnerabilidade apos tomar dano
 kb_dir = 0; // knockback direcao
 kb_vel = 0; // knockback velocidade	(velocidade atual)
 kb_desacel = 0; // quanto cai por frame
+
 // ataque
 golpe = undefined;      // struct do golpe atual (scr_dados)
 golpe_pesado = false;
@@ -32,3 +33,21 @@ ataque_dir = 0;         // direção do golpe (trava no ativo)
 acertados = [];         // quem este golpe já acertou
 raio = 6;               // tamanho do corpo, para os golpes inimigos
 
+// animacao
+image_speed = 0;    // quem escolhe o quadro é o código (player_animar)
+anim_timer = 0;
+sentido = 1;        // lado do giro da arma (alterna no combo)
+
+// sprite de cada estado, so trocar aqui quando chegar na parte da arte
+spr = {
+    parado: spr_player,
+    andando: spr_player,
+    backstep: spr_player,
+    dash: spr_player,
+    ataque: spr_player,
+    tiro: spr_player,
+    cura: spr_player,
+    hit: spr_player,
+    visceral: spr_player,
+    morte: spr_player
+};
