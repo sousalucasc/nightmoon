@@ -35,6 +35,10 @@ buf_tiro = 0;
 dados_armas();
 arma = global.armas.cutelo;
 
+//IMPACTO
+hitstop = 0;    // frames que o jogo fica congelado
+tremor = 0;     // força do tremor da câmera
+
 room_goto(rm_teste); // manda o jogo para room de teste
 
 //PLAYER STATE
