@@ -51,3 +51,8 @@ spr = {
     visceral: spr_player,
     morte: spr_player
 };
+
+// tiro
+balas_max = 10;
+balas = balas_max;
+tiro_id = -1;       // número do último tiro

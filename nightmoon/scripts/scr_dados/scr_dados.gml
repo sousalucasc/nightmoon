@@ -1,7 +1,7 @@
 //Dados do jogo, balanceamento
 
 function dados_armas() {
-    // GOLPE: windup, ativo e recovery em frames
+    // golpe windup, ativo e recovery em frames
     // alcance e avanço em pixels; arco em graus.
 
     // BENGALA LAMINA (DEX)
@@ -70,6 +70,30 @@ function dados_armas() {
             sprite: spr_arma_cutelo,
             leves: [_cutelo_leve, _cutelo_leve, _cutelo_leve],
             pesado: _cutelo_pesado
+        }
+    };
+}
+
+function dados_pistolas() {
+    // tempos em frames, velocidade em px/frame, alcance em px
+    global.pistolas = {
+        pistola: {
+            nome: "Pistola",
+            startup: 3, recovery: 14,
+            projeteis: 1, leque: 0,
+            vel: 8, alcance: 120,
+            dano: 8, esc_for: 0, esc_des: 1.0,
+            parry_bonus: 4,
+            sprite: spr_arma_pistola
+        },
+        escopeta: {
+            nome: "Escopeta de cano serrado",
+            startup: 8, recovery: 22,
+            projeteis: 5, leque: 40,
+            vel: 6, alcance: 56,
+            dano: 6, esc_for: 1.0, esc_des: 0,
+            parry_bonus: 0,
+            sprite: spr_arma_escopeta
         }
     };
 }

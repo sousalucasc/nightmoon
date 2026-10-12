@@ -70,3 +70,25 @@ function angulo_golpe(_timer, _windup, _ativo, _dir, _arco, _sentido) {
     return _fim;
 }
 
+// procura um alvo objeto que o seu raio encoste no caminho do projetil
+// fez neste frame (de _x0, _y0 até _x1, _y1). Devolve o id, ou noone
+function projetil_achar_alvo(_x0, _y0, _x1, _y1, _obj) {
+    var _achou = noone;
+    var _mx = (_x0 + _x1) / 2;   // meio do caminho
+    var _my = (_y0 + _y1) / 2;
+    with (_obj) {
+        if (_achou == noone) {
+            var _r = raio + 2;
+            if (point_distance(_x1, _y1, x, y) <= _r || point_distance(_mx, _my, x, y) <= _r) {
+                _achou = id;
+            }
+        }
+    }
+    return _achou;
+}
+
+// roda dentro do projetil, quando ele acerta um inimigo
+function projetil_acertar_inimigo(_alvo) {
+    inimigo_dano(_alvo, dano);
+    aplicar_hitstop(2);
+}

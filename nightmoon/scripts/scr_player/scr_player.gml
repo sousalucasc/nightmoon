@@ -7,11 +7,13 @@ function player_trocar(_novo){
 }
 
 // Estado livre
-function player_estado_livre(){
-	player_mover(1);
-	if (player_tentar_esquivar()) return;
-	if (player_tentar_atacar()) return;
+function player_estado_livre() {
+    player_mover(1);
+    if (player_tentar_esquivar()) return;
+    if (player_tentar_atacar()) return;
+    if (player_tentar_atirar()) return;
 }
+
 /* antes do tweak o codigo ficava assim
 // Estado livre
 function player_estado_livre(){
@@ -91,7 +93,7 @@ function player_comecar_esquiva(){
 	if(esq_exp){
 		// dash: arranque forte e freada seca (desaceleracao exponencial)
 		esq_fator = 0.78;
-		esq_vel = esq.distancia * 1.3* (1 - esq_fator) / (1 - power(esq_fator, esq.duracao));
+		esq_vel = esq.distancia * 1.1* (1 - esq_fator) / (1 - power(esq_fator, esq.duracao));
 	}else{
 		// backstep: desaceleracao linear, como antes
 		esq_vel = 2*esq.distancia/esq.duracao;
@@ -227,6 +229,7 @@ function player_estado_ataque() {
         // recovery.
         if (!golpe_pesado && player_tentar_atacar()) return;
         if (estado_timer > _fim_ativo + golpe.recovery / 2) {
+			if (player_tentar_atirar()) return;
             if (player_tentar_esquivar()) return;
         }
     }
@@ -264,6 +267,17 @@ function player_animar() {
                 image_index = 2;
             }
             break;
+		case PL.TIRO:
+            // 3 quadros: preparando, disparo, recovery
+            sprite_index = spr.tiro;
+            if (estado_timer < obj_game.pistola.startup) {
+                image_index = 0;
+            } else if (estado_timer <= obj_game.pistola.startup + 4) {
+                image_index = 1;
+            } else {
+                image_index = 2;
+            }
+            break;
         case PL.HITSTUN:
             sprite_index = spr.hit;
             image_index = anim_quadro(estado_timer, 18, sprite_index);
@@ -281,8 +295,73 @@ function player_desenhar_arma() {
     if (estado == PL.ATAQUE) {
         _ang = angulo_golpe(estado_timer, golpe.windup, golpe.ativo, ataque_dir, golpe.arco, sentido * lado);
     } else {
-        // parada aponta a mira
+        // Parada: apontando para a mira, um pouco para baixo.
         _ang = obj_game.mira_dir - 30 * lado;
     }
     draw_sprite_ext(obj_game.arma.sprite, 0, x + 2 * lado, y - 10, 1, 1, _ang, c_white, 1);
+
+    // No tiro, a pistola aparece apontando para o alvo.
+    if (estado == PL.TIRO) {
+        // Apontando para a esquerda, espelha na vertical para não ficar de cabeça para baixo.
+        var _esc_y = 1;
+        if (ataque_dir > 90 && ataque_dir < 270) {
+            _esc_y = -1;
+        }
+        // A mão da pistola, no desenho do tiro, fica 3 px à frente e 12 acima dos pés.
+        draw_sprite_ext(obj_game.pistola.sprite, 0, x + 3 * lado, y - 12, 1, _esc_y, ataque_dir, c_white, 1);
+    }
+}
+// começa um tiro se Q esta no buffer e tem bala.
+function player_tentar_atirar() {
+    if (obj_game.buf_tiro > 0 && balas > 0) {
+        obj_game.buf_tiro = 0;
+        balas -= 1;
+        obj_game.contador_tiros += 1;
+        tiro_id = obj_game.contador_tiros;
+        ataque_dir = obj_game.mira_dir;
+        player_trocar(PL.TIRO);
+        return true;
+    }
+    return false;
+}
+
+function player_estado_tiro() {
+    var _p = obj_game.pistola;
+    // ate o tiro sair da pra mirar
+    if (estado_timer <= _p.startup) {
+        ataque_dir = obj_game.mira_dir;
+    }
+    if (estado_timer == _p.startup) {
+        player_disparar(_p);
+    }
+    // segunda metade do recovery, pode esquivar
+    if (estado_timer > _p.startup + _p.recovery / 2) {
+        if (player_tentar_esquivar()) return;
+    }
+    if (estado_timer >= _p.startup + _p.recovery) {
+        player_trocar(PL.LIVRE);
+    }
+}
+
+/// cria os projéteis da pistola 
+function player_disparar(_p) {
+    for (var i = 0; i < _p.projeteis; i++) {
+        var _ang = ataque_dir;
+        if (_p.projeteis > 1) {
+            // espalha igualmente dentro do leque: de -leque/2 até +leque/2.
+            _ang = ataque_dir - _p.leque / 2 + _p.leque * i / (_p.projeteis - 1);
+        }
+        var _b = instance_create_depth(x, y, depth - 1, obj_projetil);
+        _b.do_player = true;
+        _b.dir = _ang;
+        _b.vel = _p.vel;
+        _b.alcance = _p.alcance;
+        _b.dano = dano_escalado(_p.dano, _p.esc_for, _p.esc_des);
+        _b.parry_bonus = _p.parry_bonus;
+        _b.tiro_id = tiro_id;
+    }
+    // Clarão na boca do cano: da mão da pistola até a ponta do sprite dela.
+    var _cano = sprite_get_width(_p.sprite) - sprite_get_xoffset(_p.sprite);
+    fx_criar(x + 3 * lado + lengthdir_x(_cano, ataque_dir), y - 12 + lengthdir_y(_cano, ataque_dir), spr_fx_disparo, ataque_dir, 1);
+    tremer_tela(1);
 }

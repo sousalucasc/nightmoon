@@ -9,6 +9,7 @@ switch(estado){
 	case PL.HITSTUN: player_estado_hitstun(); break;
 	case PL.MORTE: player_estado_morte(); break;
 	case PL.ATAQUE:  player_estado_ataque();  break;
+	case PL.TIRO:    player_estado_tiro();    break;
 }
 
 // stamina volta a encher depois de player_gastar_stamina
@@ -25,7 +26,7 @@ if(invul_timer > 0){
 
 // corpo vira pro lado do mouse
 var _olhar = obj_game.mira_dir;
-if (estado == PL.ATAQUE) {
+if (estado == PL.ATAQUE || estado == PL.TIRO) {
     _olhar = ataque_dir;
 }
 if (_olhar > 90 && _olhar < 270) {
@@ -34,6 +35,6 @@ if (_olhar > 90 && _olhar < 270) {
     lado = 1;
 }
 
-player_animar();
+player_animar();	
 
 depth = -y;

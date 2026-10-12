@@ -44,13 +44,13 @@ if (obj_game.debug) {
     draw_set_colour(c_white);
 
     // debug do golpe
-    if (estado == PL.ATAQUE) {
-        if (estado_timer > golpe.windup && estado_timer <= golpe.windup + golpe.ativo) {
-            draw_set_colour(c_red);
-        } else {
-            draw_set_colour(c_gray);
-        }
-        desenhar_setor(x, y, ataque_dir, golpe.alcance, golpe.arco);
-        draw_set_colour(c_white);
+	if (estado == PL.ATAQUE) {
+    if (estado_timer > golpe.windup && estado_timer <= golpe.windup + golpe.ativo) {
+        draw_set_colour(c_red);
+    } else {
+        draw_set_colour(c_gray);
     }
+    desenhar_setor(x, y, ataque_dir, golpe.alcance, golpe.arco);
+    draw_set_colour(c_white);
+}
 }

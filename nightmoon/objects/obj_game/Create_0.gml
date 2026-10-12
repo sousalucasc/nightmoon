@@ -31,13 +31,18 @@ buf_leve = 0;
 buf_pesado = 0;
 buf_tiro = 0;
 
-//ARMAS
+//ARMAS (MELEE)	
 dados_armas();
 arma = global.armas.cutelo;
 
 //IMPACTO
 hitstop = 0;    // frames que o jogo fica congelado
 tremor = 0;     // força do tremor da câmera
+
+//ARMAS (PISTOLA)
+dados_pistolas();
+pistola = global.pistolas.pistola;   // pistola equipada
+contador_tiros = 0;                  // cada tiro ganha um número único
 
 room_goto(rm_teste); // manda o jogo para room de teste
 
