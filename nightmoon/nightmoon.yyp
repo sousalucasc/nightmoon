@@ -92,7 +92,6 @@
     {"id":{"name":"spr_player_walk","path":"sprites/spr_player_walk/spr_player_walk.yy",},},
     {"id":{"name":"spr_playernew","path":"sprites/spr_playernew/spr_playernew.yy",},},
     {"id":{"name":"spr_projetil","path":"sprites/spr_projetil/spr_projetil.yy",},},
-    {"id":{"name":"spr_projetil34","path":"sprites/spr_projetil34/spr_projetil34.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

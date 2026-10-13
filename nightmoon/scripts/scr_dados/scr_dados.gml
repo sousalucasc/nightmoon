@@ -15,7 +15,7 @@ function dados_armas() {
         windup: 14, ativo: 4, recovery: 14,
         dano: 22, stamina: 25,
         alcance: 34, arco: 30, avanco: 20,
-        hyper: false, fx: spr_fx_corte
+        hyper: false, fx: spr_fx_estocada
     };
 
     // MACHADO (STR)
@@ -23,13 +23,13 @@ function dados_armas() {
         windup: 14, ativo: 5, recovery: 16,
         dano: 24, stamina: 22,
         alcance: 28, arco: 180, avanco: 6,
-        hyper: false, fx: spr_fx_corte
+        hyper: false, fx: spr_fx_corte_180
     };
     var _machado_pesado = {
         windup: 22, ativo: 8, recovery: 22,
         dano: 38, stamina: 35,
         alcance: 30, arco: 360, avanco: 0,
-        hyper: true, fx: spr_fx_corte
+        hyper: true, fx: spr_fx_giro_360
     };
 
     // CUTELO (STR/DEX)
@@ -37,13 +37,13 @@ function dados_armas() {
         windup: 8, ativo: 4, recovery: 11,
         dano: 14, stamina: 15,
         alcance: 25, arco: 120, avanco: 5,
-        hyper: false, fx: spr_fx_corte
+        hyper: false, fx: spr_fx_corte_120	
     };
     var _cutelo_pesado = {
         windup: 16, ativo: 5, recovery: 16,
         dano: 28, stamina: 28,
         alcance: 32, arco: 60, avanco: 10,
-        hyper: false, fx: spr_fx_corte
+        hyper: false, fx: spr_fx_estocada
     };
 
     global.armas = {
