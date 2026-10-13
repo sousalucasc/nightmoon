@@ -40,16 +40,16 @@ sentido = 1;        // lado do giro da arma (alterna no combo)
 
 // sprite de cada estado, so trocar aqui quando chegar na parte da arte
 spr = {
-    parado: spr_player,
-    andando: spr_player,
-    backstep: spr_player,
-    dash: spr_player,
-    ataque: spr_player,
-    tiro: spr_player,
-    cura: spr_player,
-    hit: spr_player,
-    visceral: spr_player,
-    morte: spr_player
+    parado: spr_player_idle,
+    andando: spr_player_walk,
+    backstep: spr_player_backstep,
+    dash: spr_player_dash,
+    ataque: spr_player_ataque,
+    tiro: spr_player_tiro,
+    cura: spr_player_cura,
+    hit: spr_player_hit,
+    visceral: spr_player_visceral,
+    morte: spr_player_morte
 };
 
 // tiro

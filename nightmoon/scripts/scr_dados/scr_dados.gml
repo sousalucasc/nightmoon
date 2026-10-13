@@ -9,7 +9,7 @@ function dados_armas() {
         windup: 5, ativo: 3, recovery: 8,
         dano: 9, stamina: 10,
         alcance: 22, arco: 90, avanco: 4,
-        hyper: false, fx: spr_fx_corte
+        hyper: false, fx: spr_fx_corte_90
     };
     var _bengala_pesado = {
         windup: 14, ativo: 4, recovery: 14,
