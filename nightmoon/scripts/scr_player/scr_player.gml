@@ -216,7 +216,7 @@ function player_estado_ataque() {
         move_and_collide(lengthdir_x(_passo, ataque_dir), lengthdir_y(_passo, ataque_dir), obj_parede);
 
         var _dano = dano_escalado(golpe.dano, _arma.esc_for, _arma.esc_des);
-        var _novos = golpe_setor(x, y, ataque_dir, golpe.alcance, golpe.arco, obj_boneco, acertados);
+        var _novos = golpe_setor(x, y, ataque_dir, golpe.alcance, golpe.arco, obj_inimigo_pai, acertados);
         for (var i = 0; i < array_length(_novos); i++) {
             array_push(acertados, _novos[i]);
             inimigo_dano(_novos[i], _dano);

@@ -49,12 +49,19 @@ function golpe_setor(_x, _y, _dir, _alcance, _arco, _obj, _acertados) {
 // aplica dano num inimigo 
 function inimigo_dano(_inst, _dano) {
     with (_inst) {
-        hp -= _dano;
-        flash = 6;
-        ultimo_dano = _dano;
+        if (estado != INI.MORTE) {
+            hp -= _dano;
+            flash = 6;
+            ultimo_dano = _dano;
+            if (hp <= 0) {
+                hp = 0;
+                inimigo_morrer();
+            } else if (pode_hitstun && inimigo_pode_interromper()) {
+                inimigo_trocar(INI.HITSTUN);
+            }
+        }
     }
 }
-
 // dano escalado com dex e str
 function dano_escalado(_base, _esc_for, _esc_des) {
     var _bonus = _esc_for * 0.08 * obj_game.atr_forca + _esc_des * 0.08 * obj_game.atr_destreza;

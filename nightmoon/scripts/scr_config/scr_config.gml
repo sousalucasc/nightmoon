@@ -4,7 +4,6 @@
 #macro BUFFER_FRAMES 8
 
 //state machine do player
-
 enum PL{
 	LIVRE,
 	ESQUIVA,
@@ -14,4 +13,19 @@ enum PL{
 	HITSTUN,
 	VISCERAL,
 	MORTE,
+}
+
+
+//state machine dos inimigos
+enum INI {
+    IDLE,
+    PERSEGUIR,
+    VOLTAR,
+    ATAQUE,
+    HITSTUN,
+    STAGGER,
+    VISCERAL,
+    CAIDO,
+    TRANSFORMA,
+    MORTE
 }

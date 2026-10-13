@@ -14,7 +14,7 @@ if (collision_line(_x0, _y0, x, y, obj_parede, false, true) != noone) {
 
 // se acertar alvo
 if (do_player) {
-    var _alvo = projetil_achar_alvo(_x0, _y0, x, y, obj_boneco);
+    var _alvo = projetil_achar_alvo(_x0, _y0, x, y, obj_inimigo_pai);
     if (_alvo != noone) {
         projetil_acertar_inimigo(_alvo);
         instance_destroy();

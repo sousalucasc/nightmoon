@@ -42,7 +42,10 @@ tremor = 0;     // força do tremor da câmera
 //ARMAS (PISTOLA)
 dados_pistolas();
 pistola = global.pistolas.pistola;   // pistola equipada
-contador_tiros = 0;                  // cada tiro ganha um número único
+contador_tiros = 0;                  // cada tiro ganha um numero unico
+
+//INIMIGO
+nomes_ini = ["IDLE", "PERSEGUIR", "VOLTAR", "ATAQUE", "HITSTUN", "STAGGER", "VISCERAL", "CAIDO", "TRANSFORMA", "MORTE"];
 
 room_goto(rm_teste); // manda o jogo para room de teste
 
