@@ -25,7 +25,7 @@
   ],
   "name":"spr_fx_disparo",
   "nineSlice":null,
-  "origin":0,
+  "origin":3,
   "parent":{
     "name":"Efeitos",
     "path":"folders/Sprites/Efeitos.yy",
@@ -84,7 +84,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":0,
-    "yorigin":0,
+    "yorigin":3,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
