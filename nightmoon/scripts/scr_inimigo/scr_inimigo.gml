@@ -5,13 +5,14 @@ function ataque_novo(_windup, _ativo, _recovery, _dano, _alcance, _arco, _parry)
     return {
         windup: _windup, ativo: _ativo, recovery: _recovery,
         dano: _dano, alcance: _alcance, arco: _arco,
-        parry: _parry, // se aceita parry
-        avanco: 0, // pixels que anda durante o ativo
-        dist_min: 0, // so usa este ataque com o player
+        parry: _parry,// se aceita parry
+        avanco: 0,// pixels que anda durante o ativo
+        dist_min: 0,// so usa este ataque com o player
         dist_max: _alcance + 6,// entre dist_min e dist_max
-        seguinte: undefined, //combo
+        seguinte: undefined,//combo
         chance: 0,// chance de emendar, de 0 a 1
-        tipo: "golpe"// "golpe", "tiro" ou "salto"
+        tipo: "golpe",// golpe, tiro ou salto      
+        spr: undefined,//sprite próprio deste ataque (opcional)
     };
 }
 
@@ -158,7 +159,55 @@ function inimigo_pode_interromper() {
 }
 
 function inimigo_morrer() {
+    obj_game.almas += almas;
+    fx_criar(x, y - 10, spr_fx_sangue, 0, 1);
     inimigo_trocar(INI.MORTE);
 }
 
-
+// escolhe sprite e quadro conforme o estado.
+function inimigo_animar() {
+    anim_timer += 1;
+    switch (estado) {
+        case INI.IDLE:
+            sprite_index = spr.parado;
+            image_index = (anim_timer div 10) mod sprite_get_number(sprite_index);
+            break;
+        case INI.PERSEGUIR:
+        case INI.VOLTAR:
+            sprite_index = spr.andando;
+            image_index = (anim_timer div 6) mod sprite_get_number(sprite_index);
+            break;
+        case INI.ATAQUE:
+            // o ataque pode ter sprite proprio sao 3 quadros
+            if (ataque.spr != undefined) {
+                sprite_index = ataque.spr;
+            } else {
+                sprite_index = spr.ataque;
+            }
+            if (estado_timer <= ataque.windup) {
+                image_index = 0;
+            } else if (estado_timer <= ataque.windup + ataque.ativo) {
+                image_index = 1;
+            } else {
+                image_index = 2;
+            }
+            break;
+        case INI.HITSTUN:
+            sprite_index = spr.hit;
+            image_index = 0;
+            break;
+        case INI.STAGGER:
+            sprite_index = spr.stagger;
+            image_index = (anim_timer div 8) mod sprite_get_number(sprite_index);
+            break;
+        case INI.VISCERAL:
+        case INI.CAIDO:
+            sprite_index = spr.caido;
+            image_index = 0;
+            break;
+        case INI.MORTE:
+            sprite_index = spr.morte;
+            image_index = anim_quadro(estado_timer, 40, sprite_index);
+            break;
+    }
+}

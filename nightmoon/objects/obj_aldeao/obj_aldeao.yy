@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_aldeao",
-    "path":"sprites/spr_aldeao/spr_aldeao.yy",
+    "name":"spr_aldeao_ataque",
+    "path":"sprites/spr_aldeao_ataque/spr_aldeao_ataque.yy",
   },
   "spriteMaskId":null,
   "visible":true,

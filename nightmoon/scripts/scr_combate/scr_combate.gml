@@ -53,6 +53,7 @@ function inimigo_dano(_inst, _dano) {
             hp -= _dano;
             flash = 6;
             ultimo_dano = _dano;
+			fx_criar(x, y - 10, spr_fx_sangue, irandom(359), 1);
             if (hp <= 0) {
                 hp = 0;
                 inimigo_morrer();

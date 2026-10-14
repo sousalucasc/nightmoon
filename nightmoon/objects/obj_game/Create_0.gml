@@ -47,6 +47,9 @@ contador_tiros = 0;                  // cada tiro ganha um numero unico
 //INIMIGO
 nomes_ini = ["IDLE", "PERSEGUIR", "VOLTAR", "ATAQUE", "HITSTUN", "STAGGER", "VISCERAL", "CAIDO", "TRANSFORMA", "MORTE"];
 
+
+//ALMAS
+almas = 0;
 room_goto(rm_teste); // manda o jogo para room de teste
 
 //PLAYER STATE

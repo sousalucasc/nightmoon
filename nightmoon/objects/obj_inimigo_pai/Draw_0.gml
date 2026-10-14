@@ -1,9 +1,24 @@
-// desenho normal, ou todo branco se acabou de tomar dano
+// morto: o corpo some devagar 
+var _alpha = 1;
+if (estado == INI.MORTE) {
+    _alpha = clamp((100 - estado_timer) / 30, 0, 1);
+}
+
+// desenho normal, ou todo branco se tomar dano
 if (flash > 0) gpu_set_fog(true, c_white, 1, 0);
-draw_sprite_ext(sprite_index, image_index, x, y, lado, 1, 0, c_white, 1);
+draw_sprite_ext(sprite_index, image_index, x, y, lado, 1, 0, c_white, _alpha);
 if (flash > 0) gpu_set_fog(false, c_white, 0, 1);
 
-// aviso no começo do windup (branco) = aceita parry, vermelho = não aceita.
+// arma separada gira
+if (tem_arma && estado != INI.MORTE) {
+    var _ang = (lado == 1) ? -40 : 220;
+    if (estado == INI.ATAQUE) {
+        _ang = angulo_golpe(estado_timer, ataque.windup, ataque.ativo, ataque_dir, ataque.arco, lado);
+    }
+    draw_sprite_ext(arma_sprite, 0, x + mao_x * lado, y - mao_y, 1, 1, _ang, c_white, 1);
+}
+
+// aviso no começo do windup: branco = aceita parry, vermelho = não aceita.
 if (estado == INI.ATAQUE && estado_timer <= 8 && flash <= 0) {
     var _cor = c_red;
     if (ataque.parry) {

@@ -27,3 +27,23 @@ lado = 1;
 inicio_x = x;
 inicio_y = y;
 depth = -y;
+
+// animacao e arma
+image_speed = 0;
+anim_timer = 0;
+// sprite de cada estado, trocar dps ai caralho
+spr = {
+    parado: sprite_index,
+    andando: sprite_index,
+    ataque: sprite_index,
+    hit: sprite_index,
+    stagger: sprite_index,
+    caido: sprite_index,
+    morte: sprite_index
+};
+tem_arma = false; // desenha uma arma separada girando? (Aldeão: foice)
+arma_sprite = -1;
+// onde fica a mão da arma no desenho: 3 px à frente do centro, 10 acima dos pés 
+mao_x = 3;
+mao_y = 10;
+

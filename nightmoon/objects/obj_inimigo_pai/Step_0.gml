@@ -15,3 +15,12 @@ switch (estado) {
 }
 
 depth = -y;
+
+// inimigos não se empilham, se desencostam lentamente
+var _outro = instance_place(x, y, obj_inimigo_pai);
+if (_outro != noone && _outro.estado != INI.MORTE && estado != INI.MORTE) {
+    var _dir_fuga = point_direction(_outro.x, _outro.y, x, y);
+    move_and_collide(lengthdir_x(0.5, _dir_fuga), lengthdir_y(0.5, _dir_fuga), obj_parede);
+}
+
+inimigo_animar();
