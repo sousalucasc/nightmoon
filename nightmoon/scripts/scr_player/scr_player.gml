@@ -160,11 +160,20 @@ function player_estado_morte(){
 }	
 
 /// começa um golpe leve ou pesado se o botão está no buffer e tem stamina.
+/// se for num inimigo atordoado pega visceral
 function player_tentar_atacar() {
     var _arma = obj_game.arma;
+    if (obj_game.buf_leve > 0) {
+        var _alvo = player_procurar_visceral();
+        if (_alvo != noone) {
+            obj_game.buf_leve = 0;
+            player_comecar_visceral(_alvo);   // visceral nao gasta stamina!!
+            return true;
+        }
+    }
     if (obj_game.buf_leve > 0 && st > 0) {
         obj_game.buf_leve = 0;
-        // Vindo de um golpe leve, segue o combo. Senão, começa do primeiro.
+        // vindo de um golpe leve, segue o combo
         if (estado == PL.ATAQUE && !golpe_pesado) {
             combo_i = (combo_i + 1) mod array_length(_arma.leves);
         } else {
@@ -278,6 +287,10 @@ function player_animar() {
                 image_index = 2;
             }
             break;
+		case PL.VISCERAL:
+            sprite_index = spr.visceral;
+            image_index = anim_quadro(estado_timer, 40, sprite_index);
+            break;
         case PL.HITSTUN:
             sprite_index = spr.hit;
             image_index = anim_quadro(estado_timer, 18, sprite_index);
@@ -364,4 +377,53 @@ function player_disparar(_p) {
     var _cano = sprite_get_width(_p.sprite) - sprite_get_xoffset(_p.sprite);
     fx_criar(x + 3 * lado + lengthdir_x(_cano, ataque_dir), y - 12 + lengthdir_y(_cano, ataque_dir), spr_fx_disparo, ataque_dir, 1);
     tremer_tela(1);
+}
+
+/// procura um inimigo em stagger perto e na direção da mira
+function player_procurar_visceral() {
+    var _achou = noone;
+    var _px = x;
+    var _py = y;
+    var _mira = obj_game.mira_dir;
+    with (obj_inimigo_pai) {
+        if (estado == INI.STAGGER) {
+            var _dist = point_distance(_px, _py, x, y);
+            var _ang = point_direction(_px, _py, x, y);
+            if (_dist <= 28 + raio && abs(angle_difference(_mira, _ang)) <= 60) {
+                _achou = id;
+            }
+        }
+    }
+    return _achou;
+}
+
+function player_comecar_visceral(_alvo) {
+    visceral_alvo = _alvo;
+    ataque_dir = point_direction(x, y, _alvo.x, _alvo.y);
+    with (_alvo) {
+        inimigo_trocar(INI.VISCERAL);
+    }
+    player_trocar(PL.VISCERAL);
+}
+
+function player_estado_visceral() {
+    invulneravel = true;
+    // frame 20: o golpe entra. dano escala com dex
+    if (estado_timer == 20 && instance_exists(visceral_alvo)) {
+        var _dano = round(60 * (1 + 0.08 * obj_game.atr_destreza));
+        inimigo_dano(visceral_alvo, _dano);
+        fx_criar(visceral_alvo.x, visceral_alvo.y - 10, spr_fx_sangue, ataque_dir, 1);
+        aplicar_hitstop(10);
+        tremer_tela(3);
+    }
+    if (estado_timer >= 40) {
+        invulneravel = false;
+        // se ele sobreviveu, fica caido um tempinho
+        if (instance_exists(visceral_alvo) && visceral_alvo.estado == INI.VISCERAL) {
+            with (visceral_alvo) {
+                inimigo_trocar(INI.CAIDO);
+            }
+        }
+        player_trocar(PL.LIVRE);
+    }
 }

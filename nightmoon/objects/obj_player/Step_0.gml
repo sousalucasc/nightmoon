@@ -9,6 +9,7 @@ switch(estado){
 	case PL.HITSTUN: player_estado_hitstun(); break;
 	case PL.MORTE: player_estado_morte(); break;
 	case PL.ATAQUE:  player_estado_ataque();  break;
+	case PL.VISCERAL: player_estado_visceral(); break;
 	case PL.TIRO:    player_estado_tiro();    break;
 }
 
@@ -26,7 +27,7 @@ if(invul_timer > 0){
 
 // corpo vira pro lado do mouse
 var _olhar = obj_game.mira_dir;
-if (estado == PL.ATAQUE || estado == PL.TIRO) {
+if (estado == PL.ATAQUE || estado == PL.TIRO || estado == PL.VISCERAL) {
     _olhar = ataque_dir;
 }
 if (_olhar > 90 && _olhar < 270) {

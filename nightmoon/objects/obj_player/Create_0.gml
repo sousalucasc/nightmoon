@@ -56,3 +56,7 @@ spr = {
 balas_max = 10;
 balas = balas_max;
 tiro_id = -1;       // número do último tiro
+
+// parry e visceral
+visceral_alvo = noone;      // inimigo do visceral atual
+ultimo_reembolso = -1;      // último tiro que devolveu bala

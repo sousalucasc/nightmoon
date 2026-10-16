@@ -47,3 +47,6 @@ arma_sprite = -1;
 mao_x = 3;
 mao_y = 10;
 
+// último tiro que deu parry em mim
+ultimo_tiro_parry = -1;   
+

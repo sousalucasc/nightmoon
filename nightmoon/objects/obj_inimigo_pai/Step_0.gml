@@ -12,6 +12,9 @@ switch (estado) {
     case INI.ATAQUE:    inimigo_estado_ataque();    break;
     case INI.HITSTUN:   inimigo_estado_hitstun();   break;
     case INI.MORTE:     inimigo_estado_morte();     break;
+	case INI.STAGGER:   inimigo_estado_stagger();   break;
+    case INI.VISCERAL:  inimigo_estado_visceral();  break;
+    case INI.CAIDO:     inimigo_estado_caido();     break;
 }
 
 depth = -y;

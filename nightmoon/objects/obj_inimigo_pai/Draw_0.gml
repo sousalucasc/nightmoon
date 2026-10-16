@@ -29,6 +29,13 @@ if (estado == INI.ATAQUE && estado_timer <= 8 && flash <= 0) {
     gpu_set_fog(false, c_white, 0, 1);
 }
 
+// atordoado fica com sinal amarelo piscando em cima da cabeça (sinaliza visceral)
+if (estado == INI.STAGGER && (estado_timer div 6) mod 2 == 0) {
+    draw_set_colour(c_yellow);
+    draw_circle(x, y - sprite_get_yoffset(sprite_index) + sprite_get_bbox_top(sprite_index) - 6, 3, false);
+    draw_set_colour(c_white);
+}
+
 if (obj_game.debug) {
     draw_set_halign(fa_center);
     draw_text(x, y - 44, obj_game.nomes_ini[estado] + " " + string(hp) + " (-" + string(ultimo_dano) + ")");
@@ -41,6 +48,12 @@ if (obj_game.debug) {
         }
         desenhar_setor(x, y, ataque_dir, ataque.alcance, ataque.arco);
     }
+	    // janela de parry aberta
+    if (inimigo_janela_parry(id, 4)) {
+        draw_set_colour(c_yellow);
+        draw_circle(x, y - 10, 12, true);
+    }
+	
     draw_set_colour(c_orange);
     draw_circle(inicio_x, inicio_y, 2, false);   // ponto inicial
     draw_set_colour(c_white);

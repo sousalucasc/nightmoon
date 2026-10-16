@@ -97,6 +97,34 @@ function projetil_achar_alvo(_x0, _y0, _x1, _y1, _obj) {
 
 // roda dentro do projetil, quando ele acerta um inimigo
 function projetil_acertar_inimigo(_alvo) {
+    // parry chega com a janela aberta, no ataque que aceita
+    if (inimigo_janela_parry(_alvo, parry_bonus) && _alvo.ultimo_tiro_parry != tiro_id) {
+        _alvo.ultimo_tiro_parry = tiro_id;   // chumbos do mesmo tiro
+        with (_alvo) {
+            inimigo_trocar(INI.STAGGER);
+        }
+        // parry certo devolve a bala 
+        if (instance_exists(obj_player) && obj_player.ultimo_reembolso != tiro_id) {
+            obj_player.ultimo_reembolso = tiro_id;
+            obj_player.balas = min(obj_player.balas_max, obj_player.balas + 1);
+        }
+        fx_criar(_alvo.x, _alvo.y - 12, spr_fx_parry, 0, 1);
+        aplicar_hitstop(6);
+        tremer_tela(2);
+    }
     inimigo_dano(_alvo, dano);
     aplicar_hitstop(2);
+}
+
+// true se o inimigo esta na janela de parry, ultimos 10 frames
+function inimigo_janela_parry(_inst, _bonus) {
+    var _aberta = false;
+    with (_inst) {
+        if (estado == INI.ATAQUE && ataque.parry) {
+            var _ini = ataque.windup - 10 - _bonus;
+            var _fim = ataque.windup + 2;
+            _aberta = (estado_timer > _ini && estado_timer <= _fim);
+        }
+    }
+    return _aberta;
 }

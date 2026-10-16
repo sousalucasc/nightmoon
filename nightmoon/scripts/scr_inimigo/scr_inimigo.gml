@@ -211,3 +211,22 @@ function inimigo_animar() {
             break;
     }
 }
+
+function inimigo_estado_stagger() {
+    if (estado_timer >= 90) {
+        inimigo_trocar(INI.PERSEGUIR);
+    }
+}
+
+function inimigo_estado_visceral() {
+    // quem termina visceral eh o player
+    if (estado_timer >= 60) {
+        inimigo_trocar(INI.CAIDO);
+    }
+}
+
+function inimigo_estado_caido() {
+    if (estado_timer >= 40) {
+        inimigo_trocar(INI.PERSEGUIR);
+    }
+}
