@@ -16,6 +16,9 @@ cam_y = 0;
 mover_x = 0;
 mover_y = 0;
 mira_dir = 0;
+// lock-on (mira travada estilo dark souls)
+lock_alvo = noone;   // inimigo travado, ou noone
+lock_dist = 190;     // alcance em pixels para travar a mira
 aperta_esquiva = false;
 aperta_leve = false;
 aperta_pesado = false;

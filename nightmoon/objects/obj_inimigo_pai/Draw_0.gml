@@ -36,6 +36,19 @@ if (estado == INI.STAGGER && (estado_timer div 6) mod 2 == 0) {
     draw_set_colour(c_white);
 }
 
+// marcador da mira travada (estilo dark souls): losango branco pulsando
+if (obj_game.lock_alvo == id && estado != INI.MORTE) {
+    var _topo = y - sprite_get_yoffset(sprite_index) + sprite_get_bbox_top(sprite_index) - 14;
+    var _r = 3 + 0.8 * dsin(current_time / 6);
+    draw_set_colour(c_white);
+    draw_line(x, _topo - _r, x + _r, _topo);
+    draw_line(x + _r, _topo, x, _topo + _r);
+    draw_line(x, _topo + _r, x - _r, _topo);
+    draw_line(x - _r, _topo, x, _topo - _r);
+    draw_circle(x, _topo, 1, true);
+    draw_set_colour(c_white);
+}
+
 if (obj_game.debug) {
     draw_set_halign(fa_center);
     draw_text(x, y - 44, obj_game.nomes_ini[estado] + " " + string(hp) + " (-" + string(ultimo_dano) + ")");

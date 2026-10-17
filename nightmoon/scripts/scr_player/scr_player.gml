@@ -427,3 +427,67 @@ function player_estado_visceral() {
         player_trocar(PL.LIVRE);
     }
 }
+
+// ============ LOCK-ON (mira travada estilo dark souls) ============
+
+/// distancia do player ate um inimigo (99999 se algum nao existe)
+function player_lock_dist(_ini) {
+    if (!instance_exists(obj_player) || !instance_exists(_ini)) return 99999;
+    return point_distance(obj_player.x, obj_player.y, _ini.x, _ini.y);
+}
+
+/// inimigos validos para travar: vivos e dentro do alcance
+function player_lock_candidatos() {
+    var _lista = [];
+    if (!instance_exists(obj_player)) return _lista;
+    var _px = obj_player.x;
+    var _py = obj_player.y;
+    var _alc = obj_game.lock_dist;
+    with (obj_inimigo_pai) {
+        if (estado != INI.MORTE && point_distance(_px, _py, x, y) <= _alc) {
+            array_push(_lista, id);
+        }
+    }
+    return _lista;
+}
+
+/// solta a mira travada
+function player_lock_soltar() {
+    obj_game.lock_alvo = noone;
+}
+
+/// inimigo vivo mais proximo dentro do alcance, ou noone
+function player_lock_mais_proximo() {
+    var _lista = player_lock_candidatos();
+    var _n = array_length(_lista);
+    if (_n == 0) return noone;
+
+    var _melhor = _lista[0];
+    var _melhor_d = player_lock_dist(_melhor);
+    for (var i = 1; i < _n; i++) {
+        var _d = player_lock_dist(_lista[i]);
+        if (_d < _melhor_d) {
+            _melhor = _lista[i];
+            _melhor_d = _d;
+        }
+    }
+    return _melhor;
+}
+
+/// clicar a rodinha: sem alvo trava no mais proximo, com alvo travado solta
+function player_lock_toggle() {
+    if (obj_game.lock_alvo != noone) {
+        player_lock_soltar();
+        return;
+    }
+    var _alvo = player_lock_mais_proximo();
+    if (_alvo != noone) obj_game.lock_alvo = _alvo;
+}
+
+/// solta o lock se o alvo morreu, sumiu ou saiu de alcance
+function player_lock_validar() {
+    if (obj_game.lock_alvo == noone) return;
+    if (!instance_exists(obj_game.lock_alvo)) { player_lock_soltar(); return; }
+    if (obj_game.lock_alvo.estado == INI.MORTE) { player_lock_soltar(); return; }
+    if (player_lock_dist(obj_game.lock_alvo) > obj_game.lock_dist) player_lock_soltar();
+}

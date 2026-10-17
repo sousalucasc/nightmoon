@@ -9,4 +9,7 @@ if (debug) {
     if (instance_exists(obj_player)) {
         draw_text(4, 60, "Balas: " + string(obj_player.balas));
     }
+    if (lock_alvo != noone) {
+        draw_text(4, 74, "Lock: " + string(lock_alvo));
+    }
 }

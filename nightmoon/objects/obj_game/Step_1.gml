@@ -11,10 +11,21 @@ if (hitstop > 0) {
 mover_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
 mover_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
 
+// lock-on: clicar a rodinha trava/solta a mira no inimigo mais proximo
+if (mouse_check_button_pressed(mb_middle)) player_lock_toggle();
+
+// valida o alvo travado (morreu, saiu de alcance, trocou de room)
+player_lock_validar();
+
 // mira no angulo do peito do player (o -10)
+// travado, a mira ignora o mouse e aponta pro inimigo
 
 if (instance_exists(obj_player)){
-	mira_dir = point_direction(obj_player.x,obj_player.y - 10, mouse_x,mouse_y);
+	if (lock_alvo != noone) {
+		mira_dir = point_direction(obj_player.x, obj_player.y - 10, lock_alvo.x, lock_alvo.y);
+	} else {
+		mira_dir = point_direction(obj_player.x, obj_player.y - 10, mouse_x, mouse_y);
+	}
 }
 
 // pressed, verdadeiro so no frame que a tecla descer
