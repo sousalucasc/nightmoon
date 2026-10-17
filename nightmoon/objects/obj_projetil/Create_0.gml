@@ -9,3 +9,4 @@ tiro_id = -1;       // chumbos do mesmo tiro dividem este número
 dist = 0;           // quanto já andou
 altura = 10;        // desenhado 10 px acima do chão (na altura da mão)
 image_speed = 0;
+cor = c_white;      // tiros inimigos ficam vermelhos

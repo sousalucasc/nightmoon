@@ -28,3 +28,7 @@ if (tremor > 0) {
 
 // pixel art fix
 camera_set_view_pos(camera, round(cam_x + _tx), round(cam_y + _ty));
+
+if (texto_timer > 0) {
+    texto_timer -= 1;
+}

@@ -52,3 +52,9 @@ function anim_quadro(_t, _dur, _spr) {
 function tremer_tela(_forca) {
     obj_game.tremor = max(obj_game.tremor, _forca);
 }
+
+/// Mostra uma mensagem no meio da tela por 3 segundos.
+function mostrar_texto(_texto) {
+    obj_game.texto = _texto;
+    obj_game.texto_timer = 180;
+}

@@ -15,6 +15,7 @@ switch (estado) {
 	case INI.STAGGER:   inimigo_estado_stagger();   break;
     case INI.VISCERAL:  inimigo_estado_visceral();  break;
     case INI.CAIDO:     inimigo_estado_caido();     break;
+	case INI.TRANSFORMA: inimigo_estado_transforma(); break;
 }
 
 depth = -y;

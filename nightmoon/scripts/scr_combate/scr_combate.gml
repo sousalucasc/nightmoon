@@ -1,14 +1,19 @@
 // funcoes de combate, quem sofre dano, e quanto sofre
 
 // aplica dano no player. _de_x, _de_y: de onde veio o golpe (para o empurrão).
-// devolve true se o dano entrou.
-function player_dano(_dano, _de_x, _de_y) {
+/// _tiro_id: número do tiro, para os chumbos de um mesmo tiro acertarem uma vez só.
+/// Golpes não passam _tiro_id (fica -1). Devolve true se o dano entrou.
+function player_dano(_dano, _de_x, _de_y, _tiro_id = -1) {
     var _entrou = false;
     with (obj_player) {
-        if (!invulneravel && invul_timer <= 0 && estado != PL.MORTE) {
+        var _mesmo_tiro = (_tiro_id != -1 && _tiro_id == ultimo_tiro_levado);
+        if (!invulneravel && invul_timer <= 0 && estado != PL.MORTE && !_mesmo_tiro) {
             _entrou = true;
 			aplicar_hitstop(4);
             tremer_tela(2);
+            if (_tiro_id != -1) {
+                ultimo_tiro_levado = _tiro_id;
+            }
             hp -= _dano;
             // Hyper armor: golpe com a flag não é interrompido no windup nem no ativo.
             var _hyper = (estado == PL.ATAQUE && golpe.hyper && estado_timer <= golpe.windup + golpe.ativo);
@@ -49,12 +54,16 @@ function golpe_setor(_x, _y, _dir, _alcance, _arco, _obj, _acertados) {
 // aplica dano num inimigo 
 function inimigo_dano(_inst, _dano) {
     with (_inst) {
-        if (estado != INI.MORTE) {
+        if (estado != INI.MORTE && estado != INI.TRANSFORMA && !no_ar) {
             hp -= _dano;
             flash = 6;
             ultimo_dano = _dano;
-			fx_criar(x, y - 10, spr_fx_sangue, irandom(359), 1);
-            if (hp <= 0) {
+            fx_criar(x, y - 10, spr_fx_sangue, irandom(359), 1);
+            if (tem_fase2 && fase == 1 && hp <= hp_max / 2) {
+                // Chefe na metade da vida: transforma (e não morre neste golpe).
+                hp = max(hp, 1);
+                inimigo_trocar(INI.TRANSFORMA);
+            } else if (hp <= 0) {
                 hp = 0;
                 inimigo_morrer();
             } else if (pode_hitstun && inimigo_pode_interromper()) {

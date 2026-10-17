@@ -54,6 +54,8 @@ if (debug) {
     if (keyboard_check_pressed(ord("3"))) arma = global.armas.cutelo;
 	if (keyboard_check_pressed(ord("4"))) pistola = global.pistolas.pistola;
     if (keyboard_check_pressed(ord("5"))) pistola = global.pistolas.escopeta;
+    if (keyboard_check_pressed(ord("B"))) room_goto(rm_teste_chefe);
+    if (keyboard_check_pressed(ord("T"))) room_goto(rm_teste);
     if (keyboard_check_pressed(ord("7"))) atr_forca += 1;
     if (keyboard_check_pressed(ord("8"))) atr_destreza += 1;
     if (keyboard_check_pressed(ord("0"))) {

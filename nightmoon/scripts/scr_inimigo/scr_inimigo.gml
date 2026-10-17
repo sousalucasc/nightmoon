@@ -93,6 +93,12 @@ function inimigo_comecar_ataque(_a) {
     acertados = [];
     if (instance_exists(obj_player)) {
         ataque_dir = point_direction(x, y, obj_player.x, obj_player.y);
+        if (_a.tipo == "salto") {
+            salto_x0 = x;
+            salto_y0 = y;
+            salto_x1 = obj_player.x;
+            salto_y1 = obj_player.y;
+        }
     }
     inimigo_trocar(INI.ATAQUE);
 }
@@ -104,17 +110,42 @@ function inimigo_estado_ataque() {
     var _fim_total  = _fim_ativo + _a.recovery;
 
     if (estado_timer <= _fim_windup) {
-        // segue o player, mas trava nos ultimos 8 frames
+        // Segue o player, mas trava nos últimos 8 frames: senão seria impossível esquivar.
         if (estado_timer < _fim_windup - 8 && instance_exists(obj_player)) {
             ataque_dir = point_direction(x, y, obj_player.x, obj_player.y);
+            if (_a.tipo == "salto") {
+                salto_x1 = obj_player.x;
+                salto_y1 = obj_player.y;
+            }
         }
     } else if (estado_timer <= _fim_ativo) {
-        if (_a.avanco > 0) {
-            var _passo = _a.avanco / _a.ativo;
-            move_and_collide(lengthdir_x(_passo, ataque_dir), lengthdir_y(_passo, ataque_dir), obj_parede);
+        var _t = estado_timer - _fim_windup;   // 1, 2, 3... dentro do ativo
+        if (_a.tipo == "tiro") {
+            if (_t == 1) {
+                inimigo_atirar(_a);
+            }
+        } else if (_a.tipo == "salto") {
+            if (_t <= _a.voo) {
+                // No ar: vai do ponto de saída até o alvo, subindo e descendo.
+                no_ar = true;
+                var _k = _t / _a.voo;              // vai de 0 a 1
+                x = lerp(salto_x0, salto_x1, _k);
+                y = lerp(salto_y0, salto_y1, _k);
+                altura = sin(_k * pi) * 24;        // 0 → 24 → 0
+                if (_t == _a.voo) {
+                    inimigo_pousar();
+                }
+            } else {
+                inimigo_golpear(_a);               // impacto em volta
+            }
+        } else {
+            if (_a.avanco > 0) {
+                var _passo = _a.avanco / _a.ativo;
+                move_and_collide(lengthdir_x(_passo, ataque_dir), lengthdir_y(_passo, ataque_dir), obj_parede);
+            }
+            inimigo_golpear(_a);
         }
-        inimigo_golpear(_a);
-        // combo, no ultimo frame do ativo, pode emendar o proximo
+        // Combo: no último frame do ativo, pode emendar o próximo golpe.
         if (estado_timer == _fim_ativo && _a.seguinte != undefined && random(1) < _a.chance) {
             inimigo_comecar_ataque(_a.seguinte);
             return;
@@ -161,6 +192,10 @@ function inimigo_pode_interromper() {
 function inimigo_morrer() {
     obj_game.almas += almas;
     fx_criar(x, y - 10, spr_fx_sangue, 0, 1);
+    if (e_chefe) {
+        obj_game.chefe_morto = true;
+        mostrar_texto("CAÇA ENCERRADA");
+    }
     inimigo_trocar(INI.MORTE);
 }
 
@@ -205,6 +240,11 @@ function inimigo_animar() {
             sprite_index = spr.caido;
             image_index = 0;
             break;
+		case INI.TRANSFORMA:
+            // Animação da transformação: 8 quadros em 90 frames.
+            sprite_index = spr.transforma;
+            image_index = anim_quadro(estado_timer, 90, sprite_index);
+            break;
         case INI.MORTE:
             sprite_index = spr.morte;
             image_index = anim_quadro(estado_timer, 40, sprite_index);
@@ -227,6 +267,58 @@ function inimigo_estado_visceral() {
 
 function inimigo_estado_caido() {
     if (estado_timer >= 40) {
+        inimigo_trocar(INI.PERSEGUIR);
+    }
+}
+
+/// Fim do salto: volta ao chão. Se caiu encostado numa parede, recua até ficar livre.
+function inimigo_pousar() {
+    no_ar = false;
+    altura = 0;
+    tremer_tela(3);
+    var _volta = point_direction(x, y, salto_x0, salto_y0);
+    var _n = 0;
+    while (place_meeting(x, y, obj_parede) && _n < 40) {
+        x += lengthdir_x(1, _volta);
+        y += lengthdir_y(1, _volta);
+        _n += 1;
+    }
+}
+
+/// Tiro de escopeta do inimigo: 5 chumbos espalhados no arco do ataque.
+function inimigo_atirar(_a) {
+    obj_game.contador_tiros += 1;
+    for (var i = 0; i < 5; i++) {
+        var _ang = ataque_dir - _a.arco / 2 + _a.arco * i / 4;
+        var _b = instance_create_depth(x, y, depth - 1, obj_projetil);
+        _b.do_player = false;
+        _b.dir = _ang;
+        _b.vel = 5;
+        _b.alcance = _a.alcance;
+        _b.dano = _a.dano;
+        _b.tiro_id = obj_game.contador_tiros;
+        _b.cor = c_red;
+        _b.altura = boca_y;     // os chumbos voam na altura da boca do cano
+    }
+    // Clarão na boca da arma desenhada no sprite (o chefe define boca_x e boca_y).
+    fx_criar(x + boca_x * lado, y - boca_y, spr_fx_disparo, ataque_dir, 1);
+    tremer_tela(1);
+}
+
+/// Chefe virando besta: 90 frames parado e invulnerável, depois troca tudo.
+function inimigo_estado_transforma() {
+    if (estado_timer == 1) {
+        tremer_tela(4);
+        tem_arma = false;      // o machado cai no desenho da transformação
+    }
+    if (estado_timer == 57) {
+        tremer_tela(6);        // rugido
+    }
+    if (estado_timer >= 90) {
+        fase = 2;
+        ataques = ataques_fase2;
+        vel = vel_fase2;
+        spr = spr_fase2;
         inimigo_trocar(INI.PERSEGUIR);
     }
 }

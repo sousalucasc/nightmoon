@@ -53,6 +53,12 @@ nomes_ini = ["IDLE", "PERSEGUIR", "VOLTAR", "ATAQUE", "HITSTUN", "STAGGER", "VIS
 
 //ALMAS
 almas = 0;
+
+chefe_morto = false;
+//MENSAGEM
+texto = "";
+texto_timer = 0;
+
 room_goto(rm_teste); // manda o jogo para room de teste
 
 //PLAYER STATE

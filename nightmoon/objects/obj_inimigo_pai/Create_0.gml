@@ -50,3 +50,17 @@ mao_y = 10;
 // último tiro que deu parry em mim
 ultimo_tiro_parry = -1;   
 
+// --- Chefe e ataques especiais ---
+nome = "";
+e_chefe = false;
+tem_fase2 = false;
+fase = 1;
+no_ar = false;      // no meio do salto: não apanha
+altura = 0;         // quanto o corpo está acima do chão (só para desenhar)
+salto_x0 = x;       // de onde saltou
+salto_y0 = y;
+salto_x1 = x;       // onde vai cair
+salto_y1 = y;
+boca_x = 12;        // onde fica a boca da arma de fogo no desenho (clarão e chumbos saem dali)
+boca_y = 12;
+
