@@ -12,6 +12,7 @@ function player_estado_livre() {
     if (player_tentar_esquivar()) return;
     if (player_tentar_atacar()) return;
     if (player_tentar_atirar()) return;
+    if (player_tentar_curar()) return;
 }
 
 /* antes do tweak o codigo ficava assim
@@ -291,6 +292,10 @@ function player_animar() {
             sprite_index = spr.visceral;
             image_index = anim_quadro(estado_timer, 40, sprite_index);
             break;
+	    case PL.CURA:
+            sprite_index = spr.cura;
+            image_index = anim_quadro(estado_timer, 24, sprite_index);
+            break;
         case PL.HITSTUN:
             sprite_index = spr.hit;
             image_index = anim_quadro(estado_timer, 18, sprite_index);
@@ -491,3 +496,25 @@ function player_lock_validar() {
     if (obj_game.lock_alvo.estado == INI.MORTE) { player_lock_soltar(); return; }
     if (player_lock_dist(obj_game.lock_alvo) > obj_game.lock_dist) player_lock_soltar();
 }
+
+
+function player_tentar_curar() {
+    if (obj_game.aperta_cura && frascos > 0 && hp < hp_max) {
+        player_trocar(PL.CURA);
+        return true;
+    }
+    return false;
+}	
+
+function player_estado_cura() {
+    player_mover(0.5);          // anda devagar enquanto cura
+    // Frame 12: o frasco é usado. Apanhar antes disso cancela sem gastar.
+    if (estado_timer == 12) {
+        frascos -= 1;
+        hp = min(hp_max, hp + round(hp_max * 0.4));
+    }
+    if (estado_timer >= 24) {
+        player_trocar(PL.LIVRE);
+    }
+}
+

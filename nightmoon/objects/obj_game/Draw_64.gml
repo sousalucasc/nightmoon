@@ -1,20 +1,50 @@
-// draw gui por cima de tudo
+// vem por cima de tudo
+draw_set_font(fnt_hud);
 
-// debug draw gui
-if (debug) {
-    draw_text(4, 4, "Arma: " + arma.nome);
-    draw_text(4, 18, "Pistola: " + pistola.nome);
-    draw_text(4, 32, "FOR " + string(atr_forca) + "  DES " + string(atr_destreza));
-    draw_text(4, 46, "Almas: " + string(almas));
-    if (instance_exists(obj_player)) {
-        draw_text(4, 60, "Balas: " + string(obj_player.balas));
+// --- HUD ---
+if (instance_exists(obj_player)) {
+    var _p = obj_player;
+
+    // barra cresce com o HP máximo (100 de vida = 50 px).
+    var _larg_hp = _p.hp_max / 2;
+    draw_set_colour(c_black);
+    draw_rectangle(6, 6, 8 + _larg_hp, 11, false);
+    draw_set_colour(c_red);
+    if (_p.hp > 0) {
+        draw_rectangle(7, 7, 7 + _larg_hp * _p.hp / _p.hp_max, 10, false);
     }
-    if (lock_alvo != noone) {
-        draw_text(4, 74, "Lock: " + string(lock_alvo));
+
+    // stamina
+    var _larg_st = _p.st_max / 2;
+    draw_set_colour(c_black);
+    draw_rectangle(6, 13, 8 + _larg_st, 16, false);
+    draw_set_colour(c_yellow);
+    if (_p.st > 0) {
+        draw_rectangle(7, 14, 7 + _larg_st * _p.st / _p.st_max, 15, false);
     }
+    draw_set_colour(c_white);
+
+    // frascos e balas
+    draw_sprite(spr_icone_frasco, 0, 6, ALTURA_BASE - 14);
+    draw_text(16, ALTURA_BASE - 16, string(_p.frascos));
+    draw_sprite(spr_icone_bala, 0, 32, ALTURA_BASE - 13);
+    draw_text(40, ALTURA_BASE - 16, string(_p.balas));
+
+    // almas
+    draw_set_halign(fa_right);
+    draw_text(LARGURA_BASE - 6, ALTURA_BASE - 16, string(almas));
+    draw_set_halign(fa_left);
+    draw_sprite(spr_icone_almas, 0, LARGURA_BASE - 16 - string_width(string(almas)), ALTURA_BASE - 13);
 }
 
-// Mensagem no meio da tela
+// debug
+if (debug) {
+    draw_text(4, 22, "Arma: " + arma.nome);
+    draw_text(4, 34, "Pistola: " + pistola.nome);
+    draw_text(4, 46, "FOR " + string(atr_forca) + "  DES " + string(atr_destreza));
+}
+
+// mensagem na tela
 if (texto_timer > 0) {
     draw_set_halign(fa_center);
     draw_set_colour(c_yellow);

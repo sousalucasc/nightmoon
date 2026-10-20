@@ -9,6 +9,7 @@ switch(estado){
 	case PL.HITSTUN: player_estado_hitstun(); break;
 	case PL.MORTE: player_estado_morte(); break;
 	case PL.ATAQUE:  player_estado_ataque();  break;
+	case PL.CURA:    player_estado_cura();    break;
 	case PL.VISCERAL: player_estado_visceral(); break;
 	case PL.TIRO:    player_estado_tiro();    break;
 }

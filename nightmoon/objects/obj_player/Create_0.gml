@@ -61,3 +61,7 @@ tiro_id = -1;       // número do último tiro
 visceral_alvo = noone;      // inimigo do visceral atual
 ultimo_reembolso = -1;      // último tiro que devolveu bala
 ultimo_tiro_levado = -1;    // chumbos do mesmo tiro só acertam uma vez
+
+// cura
+frascos_max = 20;
+frascos = frascos_max;
