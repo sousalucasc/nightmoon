@@ -59,3 +59,10 @@ function mostrar_texto(_texto) {
     obj_game.texto = _texto;
     obj_game.texto_timer = 180;
 }
+
+var _font;
+_font = font_get_name(fnt_hud);
+scribble_font_bake_shadow(_font,"fnt_hud_novo",0,1,c_black,1,-1,false);
+scribble_font_bake_outline_8dir("fnt_hud_novo","fnt_hud_oficial",c_black,false);
+scribble_font_set_default("fnt_hud_oficial");
+scribble_font_delete("fnt_hud_novo");

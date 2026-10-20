@@ -58,5 +58,9 @@ contador_tiros = 0;
 //GAME LOOP
 jogo_novo();
 
+typist = scribble_typist();
+typist.in(.8,3);
+
+
 room_goto(rm_teste);
 
