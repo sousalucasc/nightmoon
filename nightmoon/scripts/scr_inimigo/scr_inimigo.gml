@@ -191,6 +191,7 @@ function inimigo_pode_interromper() {
 
 function inimigo_morrer() {
     obj_game.almas += almas;
+    array_push(obj_game.mortos, chave);   // não renasce até descansar
     fx_criar(x, y - 10, spr_fx_sangue, 0, 1);
     if (e_chefe) {
         obj_game.chefe_morto = true;

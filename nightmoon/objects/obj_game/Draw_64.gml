@@ -52,3 +52,12 @@ if (texto_timer > 0) {
     draw_set_colour(c_white);
     draw_set_halign(fa_left);
 }
+
+// fade transicao
+if (fade > 0) {
+    draw_set_alpha(fade);
+    draw_set_colour(c_black);
+    draw_rectangle(0, 0, LARGURA_BASE, ALTURA_BASE, false);
+    draw_set_alpha(1);
+    draw_set_colour(c_white);
+}

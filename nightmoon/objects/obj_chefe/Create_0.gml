@@ -88,3 +88,8 @@ _tiro.spr = spr_chefe_tiro;
 _salto.spr = spr_chefe_salto;
 _investida.spr = spr_chefe_besta_investida;
 _salto2.spr = spr_chefe_besta_salto;
+
+// O chefe nunca renasce, nem depois de descansar.
+if (obj_game.chefe_morto) {
+    instance_destroy();
+}

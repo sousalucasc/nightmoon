@@ -22,10 +22,11 @@ function desenhar_setor(_x, _y, _dir, _alcance, _arco) {
     }
 }
 
-// true enquanto o jogo está parado, hitstop
+// true enquanto o jogo está parado, hitstop, fade, menus
 function jogo_congelado() {
-    return obj_game.hitstop > 0;
+    return obj_game.hitstop > 0 || obj_game.fade_indo;
 }
+
 
 // congela o jogo por alguns frames
 function aplicar_hitstop(_frames) {

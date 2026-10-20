@@ -65,3 +65,8 @@ ultimo_tiro_levado = -1;    // chumbos do mesmo tiro só acertam uma vez
 // cura
 frascos_max = 20;
 frascos = frascos_max;
+
+// entre rooms
+if (obj_game.player_hp >= 0) hp = min(obj_game.player_hp, hp_max);
+if (obj_game.player_frascos >= 0) frascos = obj_game.player_frascos;
+if (obj_game.player_balas >= 0) balas = obj_game.player_balas;

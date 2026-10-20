@@ -50,7 +50,7 @@ mao_y = 10;
 // último tiro que deu parry em mim
 ultimo_tiro_parry = -1;   
 
-// --- Chefe e ataques especiais ---
+// chefe e ataques especiais
 nome = "";
 e_chefe = false;
 tem_fase2 = false;
@@ -64,3 +64,9 @@ salto_y1 = y;
 boca_x = 12;        // onde fica a boca da arma de fogo no desenho (clarão e chumbos saem dali)
 boca_y = 12;
 
+// Já morto desde o último descanso? Então não aparece.
+// A chave é única por inimigo: room + posição onde foi colocado.
+chave = room_get_name(room) + "_" + string(x) + "_" + string(y);
+if (array_contains(obj_game.mortos, chave)) {
+    instance_destroy();
+}

@@ -154,11 +154,11 @@ function player_estado_hitstun() {
     }
 }
 
-function player_estado_morte(){
-	if (estado_timer >= 60){
-		room_restart();	
-	}
-}	
+function player_estado_morte() {
+    if (estado_timer == 60) {
+        jogo_player_morreu(x, y);
+    }
+}
 
 /// começa um golpe leve ou pesado se o botão está no buffer e tem stamina.
 /// se for num inimigo atordoado pega visceral
