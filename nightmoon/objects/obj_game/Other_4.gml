@@ -28,3 +28,12 @@ if (instance_exists(obj_player)) {
     cam_x = obj_player.x - LARGURA_BASE / 2;
     cam_y = obj_player.y - ALTURA_BASE / 2;
 }
+
+// Primeira vez com o player na tela: escolher arma e pistola.
+// Depois de descansar: menu da lanterna.
+if (!escolheu && instance_exists(obj_player)) {
+    menu_abrir("arma");
+} else if (abrir_menu_lanterna) {
+    menu_abrir("lanterna");
+}
+abrir_menu_lanterna = false;

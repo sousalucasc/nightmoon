@@ -15,9 +15,9 @@ esq_vel = 0; // velocidade
 esq_desacel = 0; // quanto decai por frame
 invulneravel = false; // se esta invuneravel ou nao
 
-hp_max = 100;
+hp_max = player_hp_max();
 hp = hp_max;
-st_max = 100;
+st_max = player_st_max();
 st = st_max;
 st_espera = 0; // frames ate stamina voltar a encher
 invul_timer = 0; // invulnerabilidade apos tomar dano
@@ -70,3 +70,4 @@ frascos = frascos_max;
 if (obj_game.player_hp >= 0) hp = min(obj_game.player_hp, hp_max);
 if (obj_game.player_frascos >= 0) frascos = obj_game.player_frascos;
 if (obj_game.player_balas >= 0) balas = obj_game.player_balas;
+

@@ -518,3 +518,12 @@ function player_estado_cura() {
     }
 }
 
+/// Vida e stamina máximas pelos atributos (GDD seção 9).
+function player_hp_max() {
+    return 100 + 15 * obj_game.atr_vida;
+}
+
+function player_st_max() {
+    return 100 + 10 * obj_game.atr_stamina;
+}
+

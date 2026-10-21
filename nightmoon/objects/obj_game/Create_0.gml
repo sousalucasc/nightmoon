@@ -31,6 +31,13 @@ buf_tiro = 0;
 lock_alvo = noone;   // inimigo travado, ou noone
 lock_dist = 190;     // alcance em pixels para travar a mira
 
+//MENUS
+menu_cima = false;
+menu_baixo = false;
+menu_ok = false;
+menu_voltar = false;
+abrir_menu_lanterna = false;
+
 //DEBUG
 debug = false;
 // Nomes dos estados, na mesma ordem dos enums (para o debug)

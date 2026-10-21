@@ -5,8 +5,12 @@ function jogo_novo() {
     with (obj_game) {
         arma = global.armas.cutelo;
         pistola = global.pistolas.pistola;
+        escolheu = false;           // já escolheu arma e pistola?
+        atr_vida = 0;
+        atr_stamina = 0;
         atr_forca = 0;
         atr_destreza = 0;
+        niveis = 0;                 // níveis comprados
         almas = 0;
         chefe_morto = false;
         lanterna_sala = rm_teste;   // onde volta ao morrer antes de descansar
@@ -33,7 +37,7 @@ function trocar_room(_destino) {
     }
 }
 
-/// descansar na lanterna enche tudo
+/// descansar numa lanterna: enche tudo, marca o checkpoint e renasce os inimigos.
 function lanterna_descansar(_lanterna) {
     with (obj_player) {
         hp = hp_max;
@@ -46,6 +50,7 @@ function lanterna_descansar(_lanterna) {
         lanterna_y = _lanterna.y + 12;
         mortos = [];
         chegar_na_lanterna = true;
+        abrir_menu_lanterna = true;
     }
     trocar_room(room);   // recarrega a room: os inimigos voltam
 }

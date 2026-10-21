@@ -63,3 +63,14 @@ if (debug) {
         atr_destreza = 0;
     }
 }
+
+// Menus
+menu_cima   = keyboard_check_pressed(ord("W")) || keyboard_check_pressed(vk_up);
+menu_baixo  = keyboard_check_pressed(ord("S")) || keyboard_check_pressed(vk_down);
+menu_ok     = keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord("F"));
+menu_voltar = keyboard_check_pressed(vk_escape);
+
+// Esc durante o jogo PAUSA
+if (menu_voltar && !instance_exists(obj_menu) && instance_exists(obj_player) && !fade_indo) {
+    menu_abrir("pausa");
+}
