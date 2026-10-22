@@ -69,5 +69,5 @@ typist = scribble_typist();
 typist.in(.8,3);
 
 
-room_goto(rm_teste);
+room_goto(rm_praca);
 

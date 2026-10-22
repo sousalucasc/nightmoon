@@ -29,7 +29,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_chegada",
+    "path":"sprites/spr_chegada/spr_chegada.yy",
+  },
   "spriteMaskId":null,
   "visible":false,
 }
