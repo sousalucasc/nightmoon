@@ -1,6 +1,6 @@
 // game loop de começar, morrer, descansar
 
-/// zera tudo ao começar o jogo
+/// zera tudo ao começar o jogo, é chamada ao abrir o game
 function jogo_novo() {
     with (obj_game) {
         arma = global.armas.cutelo;
@@ -13,6 +13,8 @@ function jogo_novo() {
         niveis = 0;                 // níveis comprados
         almas = 0;
         chefe_morto = false;
+        atalho_aberto = false;
+        chegada_id = -1;            // número da chegada ao passar por uma porta
         lanterna_sala = rm_teste;   // onde volta ao morrer antes de descansar
         lanterna_x = -1;            // -1: usa o lugar do player na room
         lanterna_y = -1;

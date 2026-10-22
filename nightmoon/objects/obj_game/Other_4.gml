@@ -18,6 +18,17 @@ if (chegar_na_lanterna && instance_exists(obj_player)) {
     }
 }
 
+// Chegando por uma porta: o player aparece no obj_chegada com o mesmo número.
+if (chegada_id >= 0 && instance_exists(obj_player)) {
+    with (obj_chegada) {
+        if (numero == other.chegada_id) {
+            obj_player.x = x;
+            obj_player.y = y;
+        }
+    }
+    chegada_id = -1;
+}
+
 // A mancha de almas, se ela ficou nesta room.
 if (mancha.ativa && mancha.sala == room) {
     instance_create_depth(mancha.x, mancha.y, 0, obj_mancha);

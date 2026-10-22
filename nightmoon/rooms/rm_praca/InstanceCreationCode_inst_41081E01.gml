@@ -1,0 +1,1 @@
+destino = rm_rua; chegada = 1;
