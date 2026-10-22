@@ -85,6 +85,7 @@
     {"id":{"name":"obj_projetil","path":"objects/obj_projetil/obj_projetil.yy",},},
     {"id":{"name":"rm_init","path":"rooms/rm_init/rm_init.yy",},},
     {"id":{"name":"rm_praca","path":"rooms/rm_praca/rm_praca.yy",},},
+    {"id":{"name":"rm_rua","path":"rooms/rm_rua/rm_rua.yy",},},
     {"id":{"name":"rm_teste_chefe","path":"rooms/rm_teste_chefe/rm_teste_chefe.yy",},},
     {"id":{"name":"rm_teste","path":"rooms/rm_teste/rm_teste.yy",},},
     {"id":{"name":"__scribble_class_element","path":"scripts/__scribble_class_element/__scribble_class_element.yy",},},
@@ -344,6 +345,7 @@
     {"roomId":{"name":"rm_teste","path":"rooms/rm_teste/rm_teste.yy",},},
     {"roomId":{"name":"rm_teste_chefe","path":"rooms/rm_teste_chefe/rm_teste_chefe.yy",},},
     {"roomId":{"name":"rm_praca","path":"rooms/rm_praca/rm_praca.yy",},},
+    {"roomId":{"name":"rm_rua","path":"rooms/rm_rua/rm_rua.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
