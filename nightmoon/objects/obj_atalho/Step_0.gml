@@ -8,9 +8,9 @@ if (point_distance(x, y, _p.x, _p.y) < 32 && obj_game.aperta_interagir) {
         || (abre_por == "direita" && _p.x > x);
     if (_lado_certo) {
         obj_game.atalho_aberto = true;
-        mostrar_texto("O portão abriu.");
+        mostrar_texto("O portao abriu.");
         instance_destroy();
     } else {
-        mostrar_texto("Não abre por este lado.");
+        mostrar_texto("Nao abre por este lado.");
     }
 }

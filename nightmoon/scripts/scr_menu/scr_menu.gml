@@ -7,10 +7,10 @@ function menu_abrir(_tipo) {
     switch (_tipo) {
         case "lanterna":
             _m.titulo = "Lanterna";
-            _m.opcoes = ["Subir nível", "Continuar"];
+            _m.opcoes = ["Subir nivel", "Continuar"];
             break;
         case "nivel":
-            _m.titulo = "Subir nível";
+            _m.titulo = "Subir nivel";
             _m.opcoes = menu_textos_nivel();
             break;
         case "arma":
@@ -27,7 +27,7 @@ function menu_abrir(_tipo) {
             break;
         case "titulo":
             _m.titulo = "NIGHTMOON";
-            _m.opcoes = ["Começar", "Sair"];
+            _m.opcoes = ["Comecar", "Sair"];
             break;
     }
     return _m;
@@ -38,7 +38,7 @@ function menu_textos_nivel() {
     return [
         "Vida " + string(obj_game.atr_vida),
         "Stamina " + string(obj_game.atr_stamina),
-        "Força " + string(obj_game.atr_forca),
+        "Forca " + string(obj_game.atr_forca),
         "Destreza " + string(obj_game.atr_destreza),
         "Voltar"
     ];

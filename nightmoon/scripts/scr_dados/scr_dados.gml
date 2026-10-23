@@ -48,7 +48,7 @@ function dados_armas() {
 
     global.armas = {
         bengala: {
-            nome: "Bengala-lâmina",
+            nome: "Bengala-lamina",
             esc_for: 0.1,
             esc_des: 1.0,
             sprite: spr_arma_bengala,
@@ -56,7 +56,7 @@ function dados_armas() {
             pesado: _bengala_pesado
         },
         machado: {
-            nome: "Machado de caça",
+            nome: "Machado de caca",
             esc_for: 1.0,
             esc_des: 0.1,
             sprite: spr_arma_machado,
