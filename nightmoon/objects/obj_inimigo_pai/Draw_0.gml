@@ -55,9 +55,7 @@ if (estado == INI.STAGGER && (estado_timer div 6) mod 2 == 0) {
 }
 
 if (obj_game.debug) {
-    draw_set_halign(fa_center);
-    draw_text(x, _dy - 44, obj_game.nomes_ini[estado] + " " + string(hp) + " (-" + string(ultimo_dano) + ")");
-    draw_set_halign(fa_left);
+    scribble(obj_game.nomes_ini[estado] + " " + string(hp) + " (-" + string(ultimo_dano) + ")").align(fa_center, fa_top).blend(c_white).draw(x, _dy - 44);
     if (estado == INI.ATAQUE) {
         if (estado_timer > ataque.windup && estado_timer <= ataque.windup + ataque.ativo) {
             draw_set_colour(c_red);

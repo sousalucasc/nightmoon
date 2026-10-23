@@ -61,11 +61,7 @@ if (debug) {
 
 // mensagem na tela
 if (texto_timer > 0) {
-    draw_set_halign(fa_center);
-    draw_set_colour(c_yellow);
-    draw_text(LARGURA_BASE / 2, 70, texto);
-    draw_set_colour(c_white);
-    draw_set_halign(fa_left);
+    scribble(texto).align(fa_center, fa_top).blend(c_yellow).draw(LARGURA_BASE / 2, 70);
 }
 
 // fade transicao

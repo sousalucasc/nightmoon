@@ -21,20 +21,13 @@ if (!_arma_atras && _com_arma) player_desenhar_arma();
 
 // DEBUG
 if (obj_game.debug) {
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_bottom);
-
     // stamina (branco), centralizado e acima do nome do estado
-    draw_set_colour(c_white);
-    draw_text(x, y - 46, "st=" + string(st) + "/" + string(st_max) + " esp=" + string(st_espera));
+    scribble("st=" + string(st) + "/" + string(st_max) + " esp=" + string(st_espera)).align(fa_center, fa_bottom).blend(c_white).draw(x, y - 46);
 
     // nome do estado, logo acima das barras
-    draw_set_colour(c_lime);
-    draw_text(x, y - 32, obj_game.nomes_pl[estado]);
+    scribble(obj_game.nomes_pl[estado]).align(fa_center, fa_bottom).blend(c_lime).draw(x, y - 32);
 
-    draw_set_halign(fa_left);
-    draw_set_valign(fa_top);
-
+    draw_set_colour(c_white);
     draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true);
     draw_line(x, y, mouse_x, mouse_y);
 

@@ -7,8 +7,5 @@ if (acordado && estado != INI.MORTE) {
     draw_rectangle(_x1 - 1, _y1 - 1, _x1 + _larg + 1, _y1 + 4, false);
     draw_set_colour(c_maroon);
     draw_rectangle(_x1, _y1, _x1 + _larg * hp / hp_max, _y1 + 3, false);
-    draw_set_colour(c_white);
-    draw_set_halign(fa_center);
-    draw_text(LARGURA_BASE / 2, _y1 - 16, nome);
-    draw_set_halign(fa_left);
+    scribble(nome).align(fa_center, fa_top).blend(c_white).draw(LARGURA_BASE / 2, _y1 - 16);
 }
